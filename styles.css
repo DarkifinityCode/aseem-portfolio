@@ -1,167 +1,308 @@
-/* Global Reset & Base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ---------- fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+/* ---------- reset ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+/* ---------- base ---------- */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background: #f9f9f9;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: 72px; /* ensure content not hidden under fixed nav */
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+/* ---------- NAV ---------- */
+nav {
+  display: flex;
+  justify-content: space-between; /* logo left, links right */
+  align-items: center;
+  padding: 14px 28px;
+  background-color: #1f1f1f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
-/* Container for centered content */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+.logo {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.2px;
 }
 
-/* Navbar */
-header {
-    background: black;
-    color: white;
-    padding: 15px 0;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+/* nav links (desktop) */
 .nav-links {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 26px;
+  list-style: none;
+  align-items: center;
 }
 
-.nav-links a {
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .18s ease;
+  padding: 6px 0;
 }
 
-.nav-links a.active {
-    background: #444;
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #ff9800;
 }
 
-/* Hamburger Menu */
+/* hamburger (hidden on desktop) */
 .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
+  display: none; /* shown on mobile via media queries */
+  width: 36px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
-.hamburger span {
-    height: 3px;
-    width: 25px;
-    background: white;
-    margin: 4px 0;
-    border-radius: 2px;
+.hamburger div {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  margin: 3px 0;
 }
 
-/* Hero Section */
+/* ---------- HERO ---------- */
 .hero {
-    text-align: center;
-    background: black;
-    color: white;
-    padding: 50px 20px;
-}
-
-.hero .content {
-    max-width: 600px;
-    margin: 0 auto;
+  background: linear-gradient(90deg, #222 0%, #434343 100%);
+  color: #fff;
+  padding: 4.5rem 1.25rem;
+  text-align: center;
+  margin: 0 auto 1.5rem;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: .6rem;
 }
 
-.hero button {
-    background: #ff4500;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
+.hero h1 span { color: #ff9800; }
+
+.hero p {
+  font-size: 1.02rem;
+  margin-bottom: 1.25rem;
+  color: rgba(255,255,255,0.9);
 }
 
-/* Projects Section */
-.projects {
-    padding: 40px 0;
+.btn {
+  display: inline-block;
+  background: #ff9800;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(255,152,0,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
 }
 
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
+.btn:hover { transform: translateY(-3px); }
+
+/* ---------- SECTION CARDS ---------- */
+.section-card {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+}
+
+/* headings inside cards */
+.section-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.9rem;
+}
+
+/* ---------- SKILLS ---------- */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.skills-grid span {
+  background: #fafafa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ---------- PROJECT GRID ---------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
 }
 
 .project-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
 }
 
 .project-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
 }
 
-.project-card h3 {
-    padding: 15px;
+.project-body {
+  padding: 16px;
 }
 
-/* Certificates & Content Pages */
-.page-content {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+.project-body h3 { margin-bottom: 8px; }
+.project-links a {
+  color: #ff9800;
+  text-decoration: none;
+  font-weight: 700;
 }
 
-/* Footer */
+/* ---------- CERTIFICATES GRID ---------- */
+.cert-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.cert-thumb {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.cert-thumb img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  transition: transform .45s ease, opacity .45s ease;
+}
+
+.cert-thumb:hover img {
+  transform: scale(1.06);
+  opacity: 0.78;
+}
+
+.cert-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.6rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ---------- LIGHTBOX ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.86);
+  z-index: 2000;
+}
+
+.lightbox.hidden { display: none; }
+
+.lightbox-content {
+  max-width: 92%;
+  max-height: 86%;
+  position: relative;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  border-radius: 6px;
+  display: block;
+}
+
+.lightbox-caption { color: #fff; text-align: center; margin-top: 10px; }
+
+.lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ---------- FOOTER ---------- */
 footer {
-    background: black;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+  text-align: center;
+  padding: 18px 8px;
+  color: #fff;
+  background: #1f1f1f;
+  margin-top: 26px;
 }
 
-/* Responsive */
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .hero h1 { font-size: 2.1rem; }
+  .hero { padding: 3.5rem 1rem; }
+}
+
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        background: black;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        padding: 20px;
-    }
+  /* nav: hide links and show hamburger */
+  .nav-links { display: none; }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 12px;
+    background: #1f1f1f;
+    width: 200px;
+    padding: 12px;
+    border-radius: 8px;
+    gap: 12px;
+  }
+  .hamburger {
+    display: flex !important; /* FIX: ensure hamburger appears on mobile */
+  }
 
-    .nav-links.show {
-        display: flex;
-    }
+  /* fix spacing/alignment in mobile view */
+  .section-card {
+    padding: 18px;
+    margin: 1rem;
+  }
+  .projects-grid { gap: 14px; }
+  .cert-grid { gap: 10px; }
 
-    .hamburger {
-        display: flex;
-    }
+  .project-card img { height: 150px; }
+  .cert-thumb img { height: 120px; }
 }
