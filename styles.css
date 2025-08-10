@@ -1,22 +1,38 @@
+/* ========== MERGED CSS FILE ========== */
+
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-/* ---------- reset ---------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
-
-/* ---------- base ---------- */
-body {
-  font-family: 'Poppins', Arial, sans-serif;
-  background: #f4f4f4;
-  color: #222;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-top: 72px; /* ensure content not hidden under fixed nav */
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ---------- NAV ---------- */
+/* Added html, body height and flex layout for sticky footer */
+html, body {
+  height: 100%;
+  min-height: 100%;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #f4f4f4; /* from current CSS */
+  color: #222;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;  /* font smoothing */
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;             /* flex for sticky footer */
+  flex-direction: column;
+  min-height: 100vh;
+  scroll-behavior: smooth; /* smooth scrolling (optional but nice) */
+}
+
+/* ---------- BASE ---------- */
+body {
+  flex: 1 0 auto;            /* expand body in flex layout */
+  padding-top: 72px;         /* from current CSS: offset for fixed nav (nav height + padding) */
+}
+
+/* ---------- NAVIGATION ---------- */
 nav {
   display: flex;
   justify-content: space-between; /* logo left, links right */
@@ -30,8 +46,12 @@ nav {
   height: 60px;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  max-width: 1100px;          /* reintroduced container width */
+  margin-left: auto;          /* center nav container */
+  margin-right: auto;
 }
 
+/* Logo */
 .logo {
   color: #fff;
   font-weight: 700;
@@ -39,7 +59,7 @@ nav {
   letter-spacing: 0.2px;
 }
 
-/* nav links (desktop) */
+/* Nav links (desktop) */
 .nav-links {
   display: flex;
   gap: 26px;
@@ -51,18 +71,22 @@ nav {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  transition: color .18s ease;
+  transition: color 0.18s ease;
   padding: 6px 0;
 }
 
+/* Hover & active nav link styles */
 .nav-links li a:hover,
 .nav-links li a.active {
   color: #ff9800;
+  background: rgba(255,152,0,0.06);
+  border-radius: 6px;
+  padding: 6px 8px;
 }
 
-/* hamburger (hidden on desktop) */
+/* Hamburger menu (mobile) */
 .hamburger {
-  display: none; /* shown on mobile via media queries */
+  display: none; /* hidden on desktop */
   width: 36px;
   height: 24px;
   justify-content: center;
@@ -70,11 +94,15 @@ nav {
   cursor: pointer;
 }
 
-.hamburger div {
-  width: 22px;
-  height: 2px;
-  background: #fff;
-  margin: 3px 0;
+/* Hamburger bars: support div or span */
+.hamburger > div,
+.hamburger > span {
+  display: block;
+  height: 3px !important;
+  width: 26px !important;
+  background: #fff !important;
+  margin: 5px 0 !important;
+  border-radius: 2px;
 }
 
 /* ---------- HERO ---------- */
@@ -84,22 +112,34 @@ nav {
   padding: 4.5rem 1.25rem;
   text-align: center;
   margin: 0 auto 1.5rem;
+  max-width: 1100px;           /* reintroduced max width */
+  padding-left: 20px;          /* page padding */
+  padding-right: 20px;
 }
 
 .hero h1 {
   font-size: 2.6rem;
   font-weight: 700;
-  margin-bottom: .6rem;
+  margin-bottom: 0.6rem;
+  max-width: 760px;            /* constrain hero text width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.hero h1 span { color: #ff9800; }
+.hero h1 span {
+  color: #ff9800;
+}
 
 .hero p {
   font-size: 1.02rem;
   margin-bottom: 1.25rem;
   color: rgba(255,255,255,0.9);
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* ---------- BUTTONS ---------- */
 .btn {
   display: inline-block;
   background: #ff9800;
@@ -109,28 +149,37 @@ nav {
   text-decoration: none;
   font-weight: 700;
   box-shadow: 0 6px 18px rgba(255,152,0,0.12);
-  transition: transform .12s ease, box-shadow .12s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.btn:hover { transform: translateY(-3px); }
+.btn:hover {
+  transform: translateY(-3px);
+}
 
-/* ---------- SECTION CARDS ---------- */
+/* ---------- SECTIONS & CARDS ---------- */
+section, .section-card {
+  max-width: 1100px;           /* reintroduced centering and max width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
 .section-card {
-  max-width: 1100px;
-  margin: 1.5rem auto;
   background: #fff;
   border-radius: 10px;
   padding: 28px;
   box-shadow: 0 8px 26px rgba(0,0,0,0.06);
 }
 
-/* headings inside cards */
 .section-card h2 {
   font-size: 1.6rem;
   margin-bottom: 0.9rem;
 }
 
-/* ---------- SKILLS ---------- */
+/* ---------- SKILLS GRID ---------- */
+/* keep flex layout from current CSS */
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
@@ -150,8 +199,13 @@ nav {
 /* ---------- PROJECT GRID ---------- */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* reintroduced min-width 280px */
   gap: 18px;
+  max-width: 1100px;            /* centered container */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .project-card {
@@ -174,7 +228,10 @@ nav {
   padding: 16px;
 }
 
-.project-body h3 { margin-bottom: 8px; }
+.project-body h3 {
+  margin-bottom: 8px;
+}
+
 .project-links a {
   color: #ff9800;
   text-decoration: none;
@@ -186,6 +243,11 @@ nav {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1100px;          /* centered */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .cert-thumb {
@@ -201,7 +263,7 @@ nav {
   width: 100%;
   height: 160px;
   object-fit: cover;
-  transition: transform .45s ease, opacity .45s ease;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 
 .cert-thumb:hover img {
@@ -220,7 +282,7 @@ nav {
   font-weight: 700;
 }
 
-/* ---------- LIGHTBOX ---------- */
+/* ---------- LIGHTBOX SUPPORT ---------- */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -231,7 +293,9 @@ nav {
   z-index: 2000;
 }
 
-.lightbox.hidden { display: none; }
+.lightbox.hidden {
+  display: none;
+}
 
 .lightbox-content {
   max-width: 92%;
@@ -246,7 +310,11 @@ nav {
   display: block;
 }
 
-.lightbox-caption { color: #fff; text-align: center; margin-top: 10px; }
+.lightbox-caption {
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+}
 
 .lightbox-close {
   position: absolute;
@@ -263,22 +331,43 @@ nav {
 
 /* ---------- FOOTER ---------- */
 footer {
+  flex-shrink: 0;              /* sticky footer */
+  margin-top: 0;
   text-align: center;
   padding: 18px 8px;
   color: #fff;
   background: #1f1f1f;
-  margin-top: 26px;
+}
+
+/* ---------- ANCHOR NORMALIZATION ---------- */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* ---------- RESPONSIVE ---------- */
+
+/* Medium screens */
 @media (max-width: 900px) {
-  .hero h1 { font-size: 2.1rem; }
-  .hero { padding: 3.5rem 1rem; }
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+  .hero {
+    padding: 3.5rem 1rem;
+  }
+  .section-card {
+    padding: 20px;
+    margin: 1rem;
+  }
 }
 
+/* Small screens: Mobile */
 @media (max-width: 768px) {
-  /* nav: hide links and show hamburger */
-  .nav-links { display: none; }
+  /* Hide desktop nav links, show hamburger */
+  .nav-links {
+    display: none;
+  }
+
   .nav-links.active {
     display: flex;
     flex-direction: column;
@@ -291,122 +380,41 @@ footer {
     border-radius: 8px;
     gap: 12px;
   }
+
   .hamburger {
-    display: flex !important; /* FIX: ensure hamburger appears on mobile */
+    display: flex !important; /* force visible on mobile */
+    align-items: center;
+    justify-content: center;
   }
 
-  /* fix spacing/alignment in mobile view */
+  /* Adjust spacing and sizes */
   .section-card {
     padding: 18px;
     margin: 1rem;
   }
-  .projects-grid { gap: 14px; }
-  .cert-grid { gap: 10px; }
-
-  .project-card img { height: 150px; }
-  .cert-thumb img { height: 120px; }
-}
-
-/* =========================
-   OVERRIDE FIXES — APPEND ONLY
-   - Enforce centered containers
-   - Ensure hero & project widths are constrained
-   - Hamburger bars shown properly (works with div or span inside .hamburger)
-   - Footer sticks to bottom on short pages
-   - Small mobile tweaks
-   ========================= */
-
-:root {
-  --site-max-width: 1100px;
-  --page-padding: 20px;
-}
-
-/* center main sections if they are not already */
-main, .main, .page, .content, .section-card, section {
-  max-width: var(--site-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--page-padding);
-  padding-right: var(--page-padding);
-  box-sizing: border-box;
-}
-
-/* hero inner constraint (if there is no explicit inner wrapper it will limit h1/p) */
-.hero h1, .hero p, .hero .btn {
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* force project grid to be centered (parent must be centered by above) */
-.projects-grid {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* ensure certificate grid and cards are contained */
-.cert-grid, .projects-grid {
-  width: 100%;
-}
-
-/* hamburger bars: support both div or span children */
-.hamburger > div,
-.hamburger > span {
-  display: block;
-  height: 3px !important;
-  width: 26px !important;
-  background: #fff !important;
-  margin: 5px 0 !important;
-  border-radius: 2px;
-}
-
-/* Make sure hamburger is visible on mobile (strengthen selector) */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+  .projects-grid {
+    gap: 14px;
+  }
+  .cert-grid {
+    gap: 10px;
+  }
+  .project-card img {
+    height: 150px;
+  }
+  .cert-thumb img {
+    height: 120px;
   }
 }
 
-/* Footer stick: use flex layout if not present already */
-html, body {
-  min-height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-main { /* ensure your main content area expands */
-  flex: 1 0 auto;
-}
-footer {
-  flex-shrink: 0;
-  margin-top: 0; /* override earlier margin if any */
-}
-
-/* Strong anchor normalization (avoid browser-blue links) */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Fix multiple active nav appearance: visual only (JS will control the .active) */
-.nav-links a.active {
-  color: #ff9800;
-  background: rgba(255,152,0,0.06);
-  border-radius: 6px;
-  padding: 6px 8px;
-}
-
-/* small responsive polish */
-@media (max-width: 900px) {
-  .section-card { padding: 20px; margin: 1rem; }
-  .hero h1 { font-size: 2.1rem; }
-}
-
+/* Extra small screens */
 @media (max-width: 480px) {
-  .hero h1 { font-size: 1.8rem; }
-  .hamburger > div, .hamburger > span { width: 22px; height: 3px; margin: 4px 0; }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hamburger > div,
+  .hamburger > span {
+    width: 22px;
+    height: 3px;
+    margin: 4px 0;
+  }
 }
