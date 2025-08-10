@@ -1,412 +1,176 @@
-/* ---------- fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* ---------- reset ---------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
-
-/* ---------- base ---------- */
 body {
-  font-family: 'Poppins', Arial, sans-serif;
-  background: #f4f4f4;
-  color: #222;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-top: 72px; /* ensure content not hidden under fixed nav */
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    line-height: 1.6;
 }
 
-/* ---------- NAV ---------- */
+/* Navigation */
+header {
+    background: #222;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 nav {
-  display: flex;
-  justify-content: space-between; /* logo left, links right */
-  align-items: center;
-  padding: 14px 28px;
-  background-color: #1f1f1f;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
 }
 
-.logo {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: 0.2px;
+nav h1 {
+    font-size: 1.5rem;
 }
 
-/* nav links (desktop) */
-.nav-links {
-  display: flex;
-  gap: 26px;
-  list-style: none;
-  align-items: center;
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
-.nav-links li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color .18s ease;
-  padding: 6px 0;
+nav a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
 }
 
-.nav-links li a:hover,
-.nav-links li a.active {
-  color: #ff9800;
+nav a:hover {
+    color: #ff9800;
 }
 
-/* hamburger (hidden on desktop) */
-.hamburger {
-  display: none; /* shown on mobile via media queries */
-  width: 36px;
-  height: 24px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.hamburger div {
-  width: 22px;
-  height: 2px;
-  background: #fff;
-  margin: 3px 0;
-}
-
-/* ---------- HERO ---------- */
+/* Hero Section */
 .hero {
-  background: linear-gradient(90deg, #222 0%, #434343 100%);
-  color: #fff;
-  padding: 4.5rem 1.25rem;
-  text-align: center;
-  margin: 0 auto 1.5rem;
+    background: linear-gradient(to right, #222, #444);
+    color: white;
+    text-align: center;
+    padding: 5rem 1rem;
 }
 
-.hero h1 {
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin-bottom: .6rem;
+.hero h2 {
+    font-size: 2.5rem;
 }
 
-.hero h1 span { color: #ff9800; }
-
-.hero p {
-  font-size: 1.02rem;
-  margin-bottom: 1.25rem;
-  color: rgba(255,255,255,0.9);
+.hero span {
+    color: #ff9800;
 }
 
 .btn {
-  display: inline-block;
-  background: #ff9800;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 6px 18px rgba(255,152,0,0.12);
-  transition: transform .12s ease, box-shadow .12s ease;
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background: #ff9800;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
 }
 
-.btn:hover { transform: translateY(-3px); }
-
-/* ---------- SECTION CARDS ---------- */
-.section-card {
-  max-width: 1100px;
-  margin: 1.5rem auto;
-  background: #fff;
-  border-radius: 10px;
-  padding: 28px;
-  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+.btn:hover {
+    background: #e68900;
 }
 
-/* headings inside cards */
-.section-card h2 {
-  font-size: 1.6rem;
-  margin-bottom: 0.9rem;
+/* Sections */
+section {
+    width: 90%;
+    margin: auto;
+    padding: 3rem 0;
 }
 
-/* ---------- SKILLS ---------- */
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #222;
+}
+
+/* Skills */
 .skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    text-align: center;
 }
 
 .skills-grid span {
-  background: #fafafa;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #eee;
-  font-weight: 600;
-  color: #333;
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* ---------- PROJECT GRID ---------- */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 18px;
+/* Projects */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
 }
 
 .project-card {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    background: white;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.project-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
+.project-card h3 {
+    margin-bottom: 0.5rem;
 }
 
-.project-body {
-  padding: 16px;
+.project-card a {
+    color: #ff9800;
+    text-decoration: none;
 }
 
-.project-body h3 { margin-bottom: 8px; }
-.project-links a {
-  color: #ff9800;
-  text-decoration: none;
-  font-weight: 700;
+.project-card a:hover {
+    text-decoration: underline;
 }
 
-/* ---------- CERTIFICATES GRID ---------- */
-.cert-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* Contact */
+#contact p {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.cert-thumb {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-}
-
-.cert-thumb img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  transition: transform .45s ease, opacity .45s ease;
-}
-
-.cert-thumb:hover img {
-  transform: scale(1.06);
-  opacity: 0.78;
-}
-
-.cert-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.6rem;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-  color: #fff;
-  font-weight: 700;
-}
-
-/* ---------- LIGHTBOX ---------- */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.86);
-  z-index: 2000;
-}
-
-.lightbox.hidden { display: none; }
-
-.lightbox-content {
-  max-width: 92%;
-  max-height: 86%;
-  position: relative;
-}
-
-.lightbox-content img {
-  max-width: 100%;
-  max-height: calc(100vh - 160px);
-  border-radius: 6px;
-  display: block;
-}
-
-.lightbox-caption { color: #fff; text-align: center; margin-top: 10px; }
-
-.lightbox-close {
-  position: absolute;
-  top: -16px;
-  right: -16px;
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-/* ---------- FOOTER ---------- */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 18px 8px;
-  color: #fff;
-  background: #1f1f1f;
-  margin-top: 26px;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  .hero h1 { font-size: 2.1rem; }
-  .hero { padding: 3.5rem 1rem; }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  /* nav: hide links and show hamburger */
-  .nav-links { display: none; }
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 12px;
-    background: #1f1f1f;
-    width: 200px;
-    padding: 12px;
-    border-radius: 8px;
-    gap: 12px;
-  }
-  .hamburger {
-    display: flex !important; /* FIX: ensure hamburger appears on mobile */
-  }
+    nav ul {
+        flex-direction: column;
+        background: #333;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 1rem;
+        display: none;
+    }
 
-  /* fix spacing/alignment in mobile view */
-  .section-card {
-    padding: 18px;
-    margin: 1rem;
-  }
-  .projects-grid { gap: 14px; }
-  .cert-grid { gap: 10px; }
+    nav ul.show {
+        display: flex;
+    }
 
-  .project-card img { height: 150px; }
-  .cert-thumb img { height: 120px; }
-}
-
-/* =========================
-   OVERRIDE FIXES — APPEND ONLY
-   - Enforce centered containers
-   - Ensure hero & project widths are constrained
-   - Hamburger bars shown properly (works with div or span inside .hamburger)
-   - Footer sticks to bottom on short pages
-   - Small mobile tweaks
-   ========================= */
-
-:root {
-  --site-max-width: 1100px;
-  --page-padding: 20px;
-}
-
-/* center main sections if they are not already */
-main, .main, .page, .content, .section-card, section {
-  max-width: var(--site-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--page-padding);
-  padding-right: var(--page-padding);
-  box-sizing: border-box;
-}
-
-/* hero inner constraint (if there is no explicit inner wrapper it will limit h1/p) */
-.hero h1, .hero p, .hero .btn {
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* force project grid to be centered (parent must be centered by above) */
-.projects-grid {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* ensure certificate grid and cards are contained */
-.cert-grid, .projects-grid {
-  width: 100%;
-}
-
-/* hamburger bars: support both div or span children */
-.hamburger > div,
-.hamburger > span {
-  display: block;
-  height: 3px !important;
-  width: 26px !important;
-  background: #fff !important;
-  margin: 5px 0 !important;
-  border-radius: 2px;
-}
-
-/* Make sure hamburger is visible on mobile (strengthen selector) */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Footer stick: use flex layout if not present already */
-html, body {
-  min-height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-main { /* ensure your main content area expands */
-  flex: 1 0 auto;
-}
-footer {
-  flex-shrink: 0;
-  margin-top: 0; /* override earlier margin if any */
-}
-
-/* Strong anchor normalization (avoid browser-blue links) */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Fix multiple active nav appearance: visual only (JS will control the .active) */
-.nav-links a.active {
-  color: #ff9800;
-  background: rgba(255,152,0,0.06);
-  border-radius: 6px;
-  padding: 6px 8px;
-}
-
-/* small responsive polish */
-@media (max-width: 900px) {
-  .section-card { padding: 20px; margin: 1rem; }
-  .hero h1 { font-size: 2.1rem; }
-}
-
-@media (max-width: 480px) {
-  .hero h1 { font-size: 1.8rem; }
-  .hamburger > div, .hamburger > span { width: 22px; height: 3px; margin: 4px 0; }
+    nav .menu-toggle {
+        display: block;
+        cursor: pointer;
+        color: white;
+    }
 }
