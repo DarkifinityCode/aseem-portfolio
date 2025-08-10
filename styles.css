@@ -1,4 +1,4 @@
-/* ========== LIGHT MERGE CSS with Microanimations ========== */
+/* ========== LIGHT MERGE CSS with Microanimations & Certificate Grid + Dropdown Fixes ========== */
 
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -11,7 +11,8 @@
 }
 
 /* ---------- BASE ---------- */
-html, body {
+html,
+body {
     height: 100%;
     min-height: 100%;
     font-family: 'Poppins', sans-serif;
@@ -26,11 +27,13 @@ html, body {
     min-height: 100vh;
 }
 
+/* ensure body participates in flex layout correctly */
 body {
     flex: 1 0 auto; /* expand body in flex layout */
 }
 
 /* ---------- NAVIGATION ---------- */
+/* header sticky and visible */
 header {
     background: #222;
     color: white;
@@ -40,6 +43,7 @@ header {
     z-index: 1000;
 }
 
+/* center nav content inside a fixed width container */
 nav {
     display: flex;
     justify-content: space-between;
@@ -48,23 +52,33 @@ nav {
     margin: auto;
 }
 
+/* logo size */
 nav h1 {
     font-size: 1.5rem;
 }
 
+/* nav list styles (desktop default) */
 nav ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
 }
 
-nav a {
+/* support both "nav ul" and ".nav-links" selectors */
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* anchor defaults used throughout nav */
+nav a,
+.nav-links a {
     text-decoration: none;
     color: white;
     padding: 6px 12px; /* highlight box padding */
     border-radius: 8px;
-    transition: 
-      background-color 0.3s ease, 
+    transition:
+      background-color 0.3s ease,
       color 0.3s ease,
       transform 0.3s ease,
       text-shadow 0.3s ease;
@@ -73,15 +87,17 @@ nav a {
 }
 
 /* Microanimation: translucent orange box on hover */
-nav a:hover {
+nav a:hover,
+.nav-links a:hover {
     background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
     color: #ff9800; /* orange text */
     transform: scale(1.05);
     text-shadow: 0 0 8px rgba(255, 152, 0, 0.7); /* subtle glow */
 }
 
-/* Microanimation: nav underline slide */
-nav a::after {
+/* Microanimation: nav underline slide for both selectors */
+nav a::after,
+.nav-links a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -93,11 +109,21 @@ nav a::after {
     border-radius: 2px;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+.nav-links a:hover::after {
     width: calc(100% - 12px);
 }
 
-/* Hamburger menu (mobile) */
+/* Active link visual (JS will ensure a single .active) */
+nav a.active,
+.nav-links a.active {
+    color: #ff9800;
+    background: rgba(255,152,0,0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* Hamburger menu (mobile) - hidden on desktop */
 .hamburger {
     display: none;
     width: 36px;
@@ -107,7 +133,7 @@ nav a:hover::after {
     cursor: pointer;
 }
 
-/* Hamburger bars */
+/* Hamburger bars: support both div and span children */
 .hamburger > div,
 .hamburger > span {
     display: block;
@@ -172,12 +198,14 @@ nav a:hover::after {
 }
 
 /* ---------- SECTIONS ---------- */
+/* default section width and spacing (keeps your earlier nice centered feel) */
 section {
     width: 90%;
     margin: auto;
     padding: 3rem 0;
 }
 
+/* headings */
 h2 {
     text-align: center;
     margin-bottom: 2rem;
@@ -230,7 +258,7 @@ h2 {
 /* Microanimation: project card lift */
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
 }
 
 .project-card img {
@@ -241,19 +269,14 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.project-card h3 {
-    margin-bottom: 0.5rem;
-}
+.project-card h3 { margin-bottom: 0.5rem; }
 
 .project-card a {
     color: #ff9800;
     text-decoration: none;
     font-weight: 700;
 }
-
-.project-card a:hover {
-    text-decoration: underline;
-}
+.project-card a:hover { text-decoration: underline; }
 
 /* ---------- CONTACT ---------- */
 #contact p {
@@ -341,39 +364,168 @@ footer a:hover {
 }
 
 /* ---------- ANCHOR NORMALIZATION ---------- */
-a {
-    color: inherit;
-    text-decoration: none;
+a { color: inherit; text-decoration: none; }
+
+/* ---------- CERTIFICATE GRID (NEW) ---------- */
+/* The site previously used .cert-grid / .cert-thumb — keep compatibility.
+   Add new class names .certificate-grid and .certificates-grid for future HTML variants.
+   The grid shows 3 columns on desktop, 2 on mobile, supports hover and a reveal animation. */
+
+.certificate-grid,
+.certificates-grid,
+.cert-grid {
+    display: grid;
+    gap: 18px;
+    /* default 3 columns for larger screens */
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    align-items: start;
+    margin: 0;
+    padding: 0;
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* thumbnails style (works for .certificate-grid img and existing .cert-thumb img) */
+.certificate-grid img,
+.certificates-grid img,
+.cert-grid .cert-thumb img,
+.cert-grid img,
+.cert-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+/* hover grow */
+.certificate-grid img:hover,
+.certificates-grid img:hover,
+.cert-grid .cert-thumb img:hover,
+.cert-grid img:hover,
+.cert-thumb img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+/* if your HTML uses .cert-thumb wrapper, keep overlay behavior */
+.cert-thumb {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* overlay label for certificate thumbnails */
+.cert-thumb .cert-overlay,
+.certificate-grid .cert-overlay,
+.certificates-grid .cert-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.6rem;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    color: #fff;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+/* small image captions inside grid (if you use <figure><figcaption>) */
+.certificate-grid figure,
+.certificates-grid figure,
+.cert-grid figure {
+    margin: 0;
+}
+
+/* Reveal animation for certificate items */
+@keyframes certFadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.certificate-grid .cert-item,
+.certificates-grid .cert-item,
+.cert-grid .cert-item,
+.cert-thumb {
+    animation: certFadeUp 400ms ease both;
+}
+
+/* Mobile: 2 columns */
 @media (max-width: 768px) {
-    nav ul {
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+/* Very small screens: single column stacking (if needed) */
+@media (max-width: 420px) {
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- MOBILE NAV / DROPDOWN POLISH (IMPROVED) ---------- */
+/* keep existing nav ul.hide/show logic but support both .nav-links and nav ul selectors.
+   When the menu is open we show a visually distinct dropdown with a small animation. */
+
+/* default (desktop) nav already defined above; here we add mobile rules */
+@media (max-width: 768px) {
+    /* hide both forms by default */
+    nav ul,
+    .nav-links {
+        display: none !important;
         flex-direction: column;
-        background: #333;
+        background: #1a1a1a;
         position: absolute;
-        top: 60px;
-        right: 0;
-        padding: 1rem;
-        display: none;
-        width: 200px;
+        top: 64px;
+        right: 16px;
+        width: 220px;
+        padding: 12px;
         border-radius: 8px;
         gap: 12px;
-        z-index: 1001;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+        z-index: 1500;
     }
 
-    nav ul.show {
-        display: flex;
+    /* show when JS toggles .active or .show */
+    nav ul.active,
+    nav ul.show,
+    .nav-links.active,
+    .nav-links.show {
+        display: flex !important;
+        animation: dropdown 260ms ease;
     }
 
+    @keyframes dropdown {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ensure hamburger visible on mobile (strong selector) */
     .hamburger {
-        display: flex;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        color: white;
+    }
+
+    /* nav anchors inside dropdown get block-level spacing */
+    nav ul li a,
+    .nav-links li a {
+        display: block;
+        padding: 8px 10px;
     }
 }
 
-/* Small screen hamburger bars */
+/* ---------- SMALL SCREEN HAMBURGER BARS TWEAK ---------- */
 @media (max-width: 480px) {
     .hamburger > div,
     .hamburger > span {
@@ -382,3 +534,35 @@ a {
         margin: 4px 0 !important;
     }
 }
+
+/* ---------- PAGE TRANSITIONS & SECTION FADE IN ---------- */
+/* existing: you added observer-based fade-in; provide matching CSS classes to animate */
+section {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 420ms ease, transform 420ms ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* make sure hero is visible immediately */
+.hero { opacity: 1; transform: none; }
+
+/* ---------- SMALL VISUAL POLISH ---------- */
+/* subtle focus outlines for keyboard users (accessibility) */
+a:focus,
+button:focus,
+.hamburger:focus {
+    outline: 3px solid rgba(255,152,0,0.16);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* tiny tweak: ensure images don't overflow their containers */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- END OF FILE ---------- */
+/* Your CSS preserved + certificate grid + dropdown + small reveal animations added */
