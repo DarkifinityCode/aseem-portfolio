@@ -66,8 +66,10 @@ nav a {
     transition: 
       background-color 0.3s ease, 
       color 0.3s ease,
-      transform 0.3s ease;
+      transform 0.3s ease,
+      text-shadow 0.3s ease;
     position: relative; /* for underline */
+    cursor: pointer;
 }
 
 /* Microanimation: translucent orange box on hover */
@@ -75,6 +77,7 @@ nav a:hover {
     background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
     color: #ff9800; /* orange text */
     transform: scale(1.05);
+    text-shadow: 0 0 8px rgba(255, 152, 0, 0.7); /* subtle glow */
 }
 
 /* Microanimation: nav underline slide */
@@ -141,12 +144,31 @@ nav a:hover::after {
     text-decoration: none;
     transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
     font-weight: 700;
+    position: relative;
+}
+
+/* Additional microanimation: bouncing arrow after text */
+.btn::after {
+    content: "↓";
+    display: inline-block;
+    margin-left: 8px;
+    animation: bounce 1.5s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+.btn:hover::after {
+    animation-play-state: paused;
 }
 
 .btn:hover {
     background: #e68900;
     transform: translateY(-6px) scale(1.05); /* float up & scale */
     box-shadow: 0 10px 20px rgba(255, 152, 0, 0.4); /* subtle glow */
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
 }
 
 /* ---------- SECTIONS ---------- */
@@ -250,6 +272,13 @@ footer {
     position: sticky;
     bottom: 0;
     width: 100%;
+}
+
+/* Microanimation: subtle glow on footer links (if any) */
+footer a:hover {
+    text-shadow: 0 0 6px rgba(255, 152, 0, 0.8);
+    color: #ff9800;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 
 /* ---------- LIGHTBOX SUPPORT ---------- */
