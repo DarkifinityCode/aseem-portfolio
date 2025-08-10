@@ -1,4 +1,4 @@
-/* ========== LIGHT MERGE CSS with Microanimations ========== */
+/* ========== LIGHT MERGE CSS with Extended Microanimations ========== */
 
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -24,6 +24,14 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+    /* PAGE LOAD FADE-IN (NEW) */
+    opacity: 0;
+    transition: opacity 0.7s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
 }
 
 body {
@@ -66,8 +74,10 @@ nav a {
     transition: 
       background-color 0.3s ease, 
       color 0.3s ease,
-      transform 0.3s ease;
+      transform 0.3s ease,
+      text-shadow 0.3s ease;
     position: relative; /* for underline */
+    cursor: pointer; /* new: pointer on nav links */
 }
 
 /* Microanimation: translucent orange box on hover */
@@ -75,6 +85,7 @@ nav a:hover {
     background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
     color: #ff9800; /* orange text */
     transform: scale(1.05);
+    text-shadow: 0 0 8px rgba(255, 152, 0, 0.7); /* subtle glow */
 }
 
 /* Microanimation: nav underline slide */
@@ -141,6 +152,20 @@ nav a:hover::after {
     text-decoration: none;
     transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
     font-weight: 700;
+    position: relative;
+}
+
+/* Additional microanimation: bouncing arrow after text */
+.btn::after {
+    content: "↓";
+    display: inline-block;
+    margin-left: 8px;
+    animation: bounce 1.5s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+.btn:hover::after {
+    animation-play-state: paused;
 }
 
 .btn:hover {
@@ -149,11 +174,27 @@ nav a:hover::after {
     box-shadow: 0 10px 20px rgba(255, 152, 0, 0.4); /* subtle glow */
 }
 
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
 /* ---------- SECTIONS ---------- */
 section {
     width: 90%;
     margin: auto;
     padding: 3rem 0;
+
+    /* New: fade-in on scroll default state */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* New: fade-in visible class for scroll reveal */
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 h2 {
@@ -250,6 +291,13 @@ footer {
     position: sticky;
     bottom: 0;
     width: 100%;
+}
+
+/* Microanimation: subtle glow on footer links (if any) */
+footer a:hover {
+    text-shadow: 0 0 6px rgba(255, 152, 0, 0.8);
+    color: #ff9800;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 
 /* ---------- LIGHTBOX SUPPORT ---------- */
