@@ -1,4 +1,4 @@
-/* ========== LIGHT MERGE CSS ========== */
+/* ========== LIGHT MERGE CSS with Microanimations ========== */
 
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -59,16 +59,39 @@ nav ul {
 }
 
 nav a {
-  text-decoration: none;
-  color: white;
-  padding: 6px 12px; /* add padding so highlight looks like a box */
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px; /* highlight box padding */
+    border-radius: 8px;
+    transition: 
+      background-color 0.3s ease, 
+      color 0.3s ease,
+      transform 0.3s ease;
+    position: relative; /* for underline */
 }
 
+/* Microanimation: translucent orange box on hover */
 nav a:hover {
-  background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
-  color: #ff9800; /* keep orange text on hover */
+    background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
+    color: #ff9800; /* orange text */
+    transform: scale(1.05);
+}
+
+/* Microanimation: nav underline slide */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 4px;
+    left: 6px;
+    background-color: #ff9800;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+nav a:hover::after {
+    width: calc(100% - 12px);
 }
 
 /* Hamburger menu (mobile) */
@@ -108,21 +131,22 @@ nav a:hover {
     color: #ff9800;
 }
 
+/* Microanimation: button float and scale with glow */
 .btn {
-  display: inline-block;
-  background: #ff9800;
-  color: white;
-  padding: 0.7rem 1.5rem;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s ease;
-  font-weight: 700;
+    display: inline-block;
+    background: #ff9800;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 700;
 }
 
 .btn:hover {
-  background: #e68900;
-  transform: translateY(-6px); /* float up */
-  box-shadow: 0 10px 20px rgba(255, 152, 0, 0.4); /* subtle glow */
+    background: #e68900;
+    transform: translateY(-6px) scale(1.05); /* float up & scale */
+    box-shadow: 0 10px 20px rgba(255, 152, 0, 0.4); /* subtle glow */
 }
 
 /* ---------- SECTIONS ---------- */
@@ -154,6 +178,14 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     font-weight: 600;
     color: #333;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: default;
+}
+
+/* Microanimation: skill badge glow & scale on hover */
+.skills-grid span:hover {
+    box-shadow: 0 0 8px 2px rgba(255, 152, 0, 0.6);
+    transform: scale(1.05);
 }
 
 /* ---------- PROJECT GRID ---------- */
@@ -170,6 +202,13 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Microanimation: project card lift */
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
 .project-card img {
@@ -202,15 +241,15 @@ h2 {
 
 /* ---------- FOOTER ---------- */
 footer {
-  flex-shrink: 0;
-  margin-top: 0;
-  text-align: center;
-  padding: 1rem 0;
-  background: #222;
-  color: white;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
+    flex-shrink: 0;
+    margin-top: 0;
+    text-align: center;
+    padding: 1rem 0;
+    background: #222;
+    color: white;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
 
 /* ---------- LIGHTBOX SUPPORT ---------- */
@@ -222,10 +261,22 @@ footer {
     justify-content: center;
     background: rgba(0,0,0,0.86);
     z-index: 2000;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 0.35s;
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
 }
 
 .lightbox.hidden {
     display: none;
+    opacity: 0; /* reset opacity */
+    animation-name: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .lightbox-content {
@@ -302,5 +353,3 @@ a {
         margin: 4px 0 !important;
     }
 }
-
-
