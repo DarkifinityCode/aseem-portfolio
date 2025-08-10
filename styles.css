@@ -1,420 +1,297 @@
-/* ========== MERGED CSS FILE ========== */
+/* ========== LIGHT MERGE CSS ========== */
 
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 /* ---------- RESET ---------- */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Added html, body height and flex layout for sticky footer */
-html, body {
-  height: 100%;
-  min-height: 100%;
-  font-family: 'Poppins', Arial, sans-serif;
-  background: #f4f4f4; /* from current CSS */
-  color: #222;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;  /* font smoothing */
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;             /* flex for sticky footer */
-  flex-direction: column;
-  min-height: 100vh;
-  scroll-behavior: smooth; /* smooth scrolling (optional but nice) */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* ---------- BASE ---------- */
+html, body {
+    height: 100%;
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;  /* font smoothing */
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth; /* optional */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 body {
-  flex: 1 0 auto;            /* expand body in flex layout */
-  padding-top: 72px;         /* from current CSS: offset for fixed nav (nav height + padding) */
+    flex: 1 0 auto; /* expand body in flex layout */
 }
 
 /* ---------- NAVIGATION ---------- */
+header {
+    background: #222;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 nav {
-  display: flex;
-  justify-content: space-between; /* logo left, links right */
-  align-items: center;
-  padding: 14px 28px;
-  background-color: #1f1f1f;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  max-width: 1100px;          /* reintroduced container width */
-  margin-left: auto;          /* center nav container */
-  margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
 }
 
-/* Logo */
-.logo {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: 0.2px;
+nav h1 {
+    font-size: 1.5rem;
 }
 
-/* Nav links (desktop) */
-.nav-links {
-  display: flex;
-  gap: 26px;
-  list-style: none;
-  align-items: center;
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
-.nav-links li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.18s ease;
-  padding: 6px 0;
+nav a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
 }
 
-/* Hover & active nav link styles */
-.nav-links li a:hover,
-.nav-links li a.active {
-  color: #ff9800;
-  background: rgba(255,152,0,0.06);
-  border-radius: 6px;
-  padding: 6px 8px;
+nav a:hover {
+    color: #ff9800;
 }
 
 /* Hamburger menu (mobile) */
 .hamburger {
-  display: none; /* hidden on desktop */
-  width: 36px;
-  height: 24px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+    display: none;
+    width: 36px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
-/* Hamburger bars: support div or span */
+/* Hamburger bars */
 .hamburger > div,
 .hamburger > span {
-  display: block;
-  height: 3px !important;
-  width: 26px !important;
-  background: #fff !important;
-  margin: 5px 0 !important;
-  border-radius: 2px;
+    display: block;
+    height: 3px !important;
+    width: 26px !important;
+    background: #fff !important;
+    margin: 5px 0 !important;
+    border-radius: 2px;
 }
 
 /* ---------- HERO ---------- */
 .hero {
-  background: linear-gradient(90deg, #222 0%, #434343 100%);
-  color: #fff;
-  padding: 4.5rem 1.25rem;
-  text-align: center;
-  margin: 0 auto 1.5rem;
-  max-width: 1100px;           /* reintroduced max width */
-  padding-left: 20px;          /* page padding */
-  padding-right: 20px;
+    background: linear-gradient(to right, #222, #444);
+    color: white;
+    text-align: center;
+    padding: 5rem 1rem;
 }
 
-.hero h1 {
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  max-width: 760px;            /* constrain hero text width */
-  margin-left: auto;
-  margin-right: auto;
+.hero h2 {
+    font-size: 2.5rem;
 }
 
-.hero h1 span {
-  color: #ff9800;
+.hero span {
+    color: #ff9800;
 }
 
-.hero p {
-  font-size: 1.02rem;
-  margin-bottom: 1.25rem;
-  color: rgba(255,255,255,0.9);
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ---------- BUTTONS ---------- */
 .btn {
-  display: inline-block;
-  background: #ff9800;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 6px 18px rgba(255,152,0,0.12);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background: #ff9800;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-weight: 700;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
+    background: #e68900;
 }
 
-/* ---------- SECTIONS & CARDS ---------- */
-section, .section-card {
-  max-width: 1100px;           /* reintroduced centering and max width */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  box-sizing: border-box;
+/* ---------- SECTIONS ---------- */
+section {
+    width: 90%;
+    margin: auto;
+    padding: 3rem 0;
 }
 
-.section-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 28px;
-  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
-}
-
-.section-card h2 {
-  font-size: 1.6rem;
-  margin-bottom: 0.9rem;
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #222;
 }
 
 /* ---------- SKILLS GRID ---------- */
-/* keep flex layout from current CSS */
 .skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    text-align: center;
 }
 
 .skills-grid span {
-  background: #fafafa;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #eee;
-  font-weight: 600;
-  color: #333;
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: 600;
+    color: #333;
 }
 
 /* ---------- PROJECT GRID ---------- */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* reintroduced min-width 280px */
-  gap: 18px;
-  max-width: 1100px;            /* centered container */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
 }
 
 .project-card {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    background: white;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-bottom: 1rem;
 }
 
-.project-body {
-  padding: 16px;
+.project-card h3 {
+    margin-bottom: 0.5rem;
 }
 
-.project-body h3 {
-  margin-bottom: 8px;
+.project-card a {
+    color: #ff9800;
+    text-decoration: none;
+    font-weight: 700;
 }
 
-.project-links a {
-  color: #ff9800;
-  text-decoration: none;
-  font-weight: 700;
+.project-card a:hover {
+    text-decoration: underline;
 }
 
-/* ---------- CERTIFICATES GRID ---------- */
-.cert-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  max-width: 1100px;          /* centered */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.cert-thumb {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-}
-
-.cert-thumb img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  transition: transform 0.45s ease, opacity 0.45s ease;
-}
-
-.cert-thumb:hover img {
-  transform: scale(1.06);
-  opacity: 0.78;
-}
-
-.cert-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.6rem;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-  color: #fff;
-  font-weight: 700;
-}
-
-/* ---------- LIGHTBOX SUPPORT ---------- */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.86);
-  z-index: 2000;
-}
-
-.lightbox.hidden {
-  display: none;
-}
-
-.lightbox-content {
-  max-width: 92%;
-  max-height: 86%;
-  position: relative;
-}
-
-.lightbox-content img {
-  max-width: 100%;
-  max-height: calc(100vh - 160px);
-  border-radius: 6px;
-  display: block;
-}
-
-.lightbox-caption {
-  color: #fff;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: -16px;
-  right: -16px;
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
+/* ---------- CONTACT ---------- */
+#contact p {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 /* ---------- FOOTER ---------- */
 footer {
-  flex-shrink: 0;              /* sticky footer */
-  margin-top: 0;
-  text-align: center;
-  padding: 18px 8px;
-  color: #fff;
-  background: #1f1f1f;
+    flex-shrink: 0; /* sticky footer */
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+/* ---------- LIGHTBOX SUPPORT ---------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.86);
+    z-index: 2000;
+}
+
+.lightbox.hidden {
+    display: none;
+}
+
+.lightbox-content {
+    max-width: 92%;
+    max-height: 86%;
+    position: relative;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: calc(100vh - 160px);
+    border-radius: 6px;
+    display: block;
+}
+
+.lightbox-caption {
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 /* ---------- ANCHOR NORMALIZATION ---------- */
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* ---------- RESPONSIVE ---------- */
-
-/* Medium screens */
-@media (max-width: 900px) {
-  .hero h1 {
-    font-size: 2.1rem;
-  }
-  .hero {
-    padding: 3.5rem 1rem;
-  }
-  .section-card {
-    padding: 20px;
-    margin: 1rem;
-  }
-}
-
-/* Small screens: Mobile */
 @media (max-width: 768px) {
-  /* Hide desktop nav links, show hamburger */
-  .nav-links {
-    display: none;
-  }
+    nav ul {
+        flex-direction: column;
+        background: #333;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 1rem;
+        display: none;
+        width: 200px;
+        border-radius: 8px;
+        gap: 12px;
+        z-index: 1001;
+    }
 
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 12px;
-    background: #1f1f1f;
-    width: 200px;
-    padding: 12px;
-    border-radius: 8px;
-    gap: 12px;
-  }
+    nav ul.show {
+        display: flex;
+    }
 
-  .hamburger {
-    display: flex !important; /* force visible on mobile */
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Adjust spacing and sizes */
-  .section-card {
-    padding: 18px;
-    margin: 1rem;
-  }
-  .projects-grid {
-    gap: 14px;
-  }
-  .cert-grid {
-    gap: 10px;
-  }
-  .project-card img {
-    height: 150px;
-  }
-  .cert-thumb img {
-    height: 120px;
-  }
+    .hamburger {
+        display: flex;
+        cursor: pointer;
+        color: white;
+    }
 }
 
-/* Extra small screens */
+/* Small screen hamburger bars */
 @media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-  .hamburger > div,
-  .hamburger > span {
-    width: 22px;
-    height: 3px;
-    margin: 4px 0;
-  }
+    .hamburger > div,
+    .hamburger > span {
+        width: 22px !important;
+        height: 3px !important;
+        margin: 4px 0 !important;
+    }
 }
