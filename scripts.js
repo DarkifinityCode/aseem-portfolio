@@ -164,7 +164,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  /* --------------------
+     Page fade-in on load (added)
+     -------------------- */
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+
+  /* --------------------
+     Section fade-in on scroll (added)
+     -------------------- */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // animate once
+      }
+    });
+  });
+
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
+
 });
-
-
-
