@@ -198,12 +198,15 @@ h2 {
 
 /* ---------- FOOTER ---------- */
 footer {
-    flex-shrink: 0; /* sticky footer */
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
+  flex-shrink: 0;
+  margin-top: 0;
+  text-align: center;
+  padding: 1rem 0;
+  background: #222;
+  color: white;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
 }
 
 /* ---------- LIGHTBOX SUPPORT ---------- */
@@ -295,3 +298,4 @@ a {
         margin: 4px 0 !important;
     }
 }
+
