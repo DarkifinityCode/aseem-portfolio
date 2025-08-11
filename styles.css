@@ -375,98 +375,104 @@ a { color: inherit; text-decoration: none; }
 .certificate-grid,
 .certificates-grid,
 .cert-grid {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(3, 1fr); /* desktop: 3 cols */
-  grid-auto-rows: 220px; /* uniform row height baseline */
-  width: 100%;
-  align-items: stretch;
-  margin: 0;
-  padding: 0;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 2fr); /* default 3 columns */
+    width: 100%;
+    align-items: start;
+    margin: 0;
+    padding: 0;
 }
 
-/* container for each item (works for .cert-thumb or .cert-item). 
-   If your HTML uses plain <img> inside grid, this rule still applies: we expect .cert-item wrapper — see JS below. */
+/* Thumbnail images — uniform height for consistency */
+.certificate-grid img,
+.certificates-grid img,
+.cert-grid .cert-thumb img,
+.cert-grid img,
+.cert-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* shows whole certificate without cropping */
+    background-color: #fff; /* makes the empty space look clean */
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+/* Hover grow effect */
+.certificate-grid img:hover,
+.certificates-grid img:hover,
+.cert-grid .cert-thumb img:hover,
+.cert-grid img:hover,
+.cert-thumb img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+/* Wrapper for certificates */
+.cert-thumb {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* Overlay label for certificate thumbnails */
+.cert-thumb .cert-overlay,
+.certificate-grid .cert-overlay,
+.certificates-grid .cert-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.6rem;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    color: #fff;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+/* Small image captions inside grid (optional <figcaption>) */
+.certificate-grid figure,
+.certificates-grid figure,
+.cert-grid figure {
+    margin: 0;
+}
+
+/* Reveal animation */
+@keyframes certFadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .certificate-grid .cert-item,
 .certificates-grid .cert-item,
 .cert-grid .cert-item,
 .cert-thumb {
-  height: 100%;            /* fills grid row height */
-  display: block;
-  overflow: hidden;
-  border-radius: 8px;
-  background: #fff;
+    animation: certFadeUp 400ms ease both;
 }
 
-/* images fill the container fully — avoids variable heights */
-.certificate-grid img,
-.certificates-grid img,
-.cert-grid img,
-.cert-thumb img,
-.certificate-grid .cert-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;      /* fills nicely and keeps uniform rows */
-  display: block;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-/* Slightly taller row for portrait items (JS will add .portrait to wrapper) */
-.certificate-grid .portrait,
-.certificates-grid .portrait,
-.cert-grid .portrait,
-.cert-thumb.portrait {
-  grid-row: auto;
-  /* override default row height for portraits by spanning 1.3 rows visually */
-  height: 100%;
-  /* let portrait wrappers be a bit taller by using transform on the image container */
-}
-.certificate-grid .portrait img,
-.cert-grid .portrait img,
-.cert-thumb.portrait img {
-  object-fit: cover;
-}
-
-/* Hover */
-.certificate-grid img:hover,
-.cert-grid img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-}
-
-/* Mobile: 2 columns and slightly smaller rows */
+/* Mobile: 2 columns */
 @media (max-width: 768px) {
-  .certificate-grid,
-  .certificates-grid,
-  .cert-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 180px;
-    gap: 12px;
-  }
-
-  .certificate-grid .portrait,
-  .cert-grid .portrait,
-  .cert-thumb.portrait {
-    /* reduce extra height on mobile so grid isn't too tall */
-    /* keep default behavior — the JS only adds classes; tweak if needed */
-  }
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: repeat(2, 3fr);
+        gap: 12px;
+    }
 }
 
-/* Very small screens: single column */
+/* Very small screens: 1 column */
 @media (max-width: 420px) {
-  .certificate-grid,
-  .certificates-grid,
-  .cert-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-  }
-
-  .certificate-grid img,
-  .cert-grid img {
-    height: auto;
-    object-fit: contain;
-  }
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
 }
+
 
 /* ---------- MOBILE NAV / DROPDOWN POLISH (IMPROVED) ---------- */
 /* keep existing nav ul.hide/show logic but support both .nav-links and nav ul selectors.
@@ -562,6 +568,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- END OF FILE ---------- */
 /* Your CSS preserved + certificate grid + dropdown + small reveal animations added */
+
 
 
 
