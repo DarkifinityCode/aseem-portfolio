@@ -367,40 +367,40 @@ footer a:hover {
 /* ---------- ANCHOR NORMALIZATION ---------- */
 a { color: inherit; text-decoration: none; }
 
-/* ---------- CERTIFICATE GRID (NEW) ---------- */
-/* The site previously used .cert-grid / .cert-thumb — keep compatibility.
-   Add new class names .certificate-grid and .certificates-grid for future HTML variants.
-   The grid shows 3 columns on desktop, 2 on mobile, supports hover and a reveal animation. */
+/* ---------- CERTIFICATE GRID (UPDATED) ---------- */
+/* Supports .certificate-grid, .certificates-grid, .cert-grid, and .cert-thumb
+   3 columns for desktop (3x2), 2 columns for mobile (2x3)
+   Handles portrait/landscape images consistently with uniform thumbnail height. */
 
 .certificate-grid,
 .certificates-grid,
 .cert-grid {
     display: grid;
     gap: 18px;
-    /* default 3 columns for larger screens */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* default 3 columns */
     width: 100%;
     align-items: start;
     margin: 0;
     padding: 0;
 }
 
-/* thumbnails style (works for .certificate-grid img and existing .cert-thumb img) */
+/* Thumbnail images — uniform height for consistency */
 .certificate-grid img,
 .certificates-grid img,
 .cert-grid .cert-thumb img,
 .cert-grid img,
 .cert-thumb img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 200px; /* fixed thumb height for even rows */
+    object-fit: cover; /* crops slightly but keeps aspect ratio */
     border-radius: 8px;
     display: block;
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    background-color: #fff; /* avoids odd gaps while loading */
 }
 
-/* hover grow */
+/* Hover grow effect */
 .certificate-grid img:hover,
 .certificates-grid img:hover,
 .cert-grid .cert-thumb img:hover,
@@ -410,7 +410,7 @@ a { color: inherit; text-decoration: none; }
     box-shadow: 0 10px 22px rgba(0,0,0,0.18);
 }
 
-/* if your HTML uses .cert-thumb wrapper, keep overlay behavior */
+/* Wrapper for certificates */
 .cert-thumb {
     position: relative;
     border-radius: 8px;
@@ -419,7 +419,7 @@ a { color: inherit; text-decoration: none; }
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-/* overlay label for certificate thumbnails */
+/* Overlay label for certificate thumbnails */
 .cert-thumb .cert-overlay,
 .certificate-grid .cert-overlay,
 .certificates-grid .cert-overlay {
@@ -434,14 +434,14 @@ a { color: inherit; text-decoration: none; }
     pointer-events: none;
 }
 
-/* small image captions inside grid (if you use <figure><figcaption>) */
+/* Small image captions inside grid (optional <figcaption>) */
 .certificate-grid figure,
 .certificates-grid figure,
 .cert-grid figure {
     margin: 0;
 }
 
-/* Reveal animation for certificate items */
+/* Reveal animation */
 @keyframes certFadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -464,7 +464,7 @@ a { color: inherit; text-decoration: none; }
     }
 }
 
-/* Very small screens: single column stacking (if needed) */
+/* Very small screens: 1 column */
 @media (max-width: 420px) {
     .certificate-grid,
     .certificates-grid,
@@ -472,6 +472,7 @@ a { color: inherit; text-decoration: none; }
         grid-template-columns: 1fr;
     }
 }
+
 
 /* ---------- MOBILE NAV / DROPDOWN POLISH (IMPROVED) ---------- */
 /* keep existing nav ul.hide/show logic but support both .nav-links and nav ul selectors.
@@ -567,4 +568,5 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- END OF FILE ---------- */
 /* Your CSS preserved + certificate grid + dropdown + small reveal animations added */
+
 
