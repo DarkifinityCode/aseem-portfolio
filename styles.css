@@ -1,7 +1,44 @@
 /* ========== LIGHT MERGE CSS with Microanimations & Certificate Grid + Dropdown Fixes ========== */
 
 /* ---------- fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+/* Root Variables */
+:root {
+  /* Neutral Colors */
+  --bg-light: #f9f9f9;
+  --bg-dark: #121212;
+  --text-light: #111111;
+  --text-dark: #eeeeee;
+
+  /* Accent Colors */
+  --accent-1: #ff4d5a; /* Vibrant red/pink */
+  --accent-2: #4da6ff; /* Bright blue */
+  --accent-3: #ffd166; /* Warm yellow */
+
+  /* Fonts */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Defaults (will auto-switch in dark/light mode) */
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+}
+
+/* Automatic Dark/Light Sync with Browser/OS */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: var(--bg-light);
+    --text: var(--text-light);
+  }
+}
 
 /* ---------- RESET ---------- */
 * {
@@ -34,7 +71,20 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Utility Accent Classes */
+.text-accent-1 { color: var(--accent-1); }
+.text-accent-2 { color: var(--accent-2); }
+.text-accent-3 { color: var(--accent-3); }
+
+.bg-accent-1 { background-color: var(--accent-1); }
+.bg-accent-2 { background-color: var(--accent-2); }
+.bg-accent-3 { background-color: var(--accent-3); }
 
 main {
   flex: 1;
@@ -571,6 +621,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- END OF FILE ---------- */
 /* Your CSS preserved + certificate grid + dropdown + small reveal animations added */
+
 
 
 
