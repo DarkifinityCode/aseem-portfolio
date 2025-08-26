@@ -62,6 +62,20 @@
   --font-body: 'Inter', sans-serif;
 }
 
+/* Fallback defaults (in case prefers-color-scheme is unavailable) */
+:root {
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+  --surface: var(--surface-light);
+  --surface-text: var(--surface-text-light);
+  --muted: var(--muted-light);
+  --accent: var(--accent-light);
+  --accent-hover: var(--accent-light-hover);
+  --accent-glow: var(--accent-light-glow);
+  --header-bg: var(--header-bg-light);
+  --focus-outline: var(--focus-outline-light);
+}
+
 /* Automatic Dark/Light Sync with Browser/OS */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -97,20 +111,6 @@
     --header-bg: var(--header-bg-light);
     --focus-outline: var(--focus-outline-light);
   }
-}
-
-/* Fallback defaults (in case prefers-color-scheme is unavailable) */
-:root {
-  --bg: var(--bg-light);
-  --text: var(--text-light);
-  --surface: var(--surface-light);
-  --surface-text: var(--surface-text-light);
-  --muted: var(--muted-light);
-  --accent: var(--accent-light);
-  --accent-hover: var(--accent-light-hover);
-  --accent-glow: var(--accent-light-glow);
-  --header-bg: var(--header-bg-light);
-  --focus-outline: var(--focus-outline-light);
 }
 
 /* ---------- RESET ---------- */
@@ -676,3 +676,4 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- END OF FILE ---------- */
 /* All original features preserved; surfaces and accents are now theme-aware across all pages */
+
