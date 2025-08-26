@@ -1,9 +1,14 @@
-/* ========== LIGHT MERGE CSS with Microanimations & Certificate Grid + Dropdown Fixes ========== */
+/* ===============================
+   CHANGED: Theme-aware accent system added.
+   - Light: warm orange accents (default)
+   - Dark: neon purple accents (automatically via prefers-color-scheme)
+   All existing layout & animations preserved; hardcoded orange replaced by variables.
+   =============================== */
 
 /* ---------- fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
 
-/* Root Variables */
+/* Root Variables (Design System + Theme-aware accent variables) */
 :root {
   /* Neutral Colors */
   --bg-light: #f9f9f9;
@@ -11,18 +16,29 @@
   --text-light: #111111;
   --text-dark: #eeeeee;
 
-  /* Accent Colors */
-  --accent-1: #ff4d5a; /* Vibrant red/pink */
-  --accent-2: #4da6ff; /* Bright blue */
-  --accent-3: #ffd166; /* Warm yellow */
+  /* Accent palette (palette entries you can reuse) */
+  --accent-light-orange: #ff9800; /* primary orange used in light mode */
+  --accent-light-orange-hover: #e68900;
+  --accent-light-orange-glow: rgba(255,152,0,0.7);
+
+  /* Neon options (for dark mode) */
+  --accent-neon-purple: #7c4dff; /* default neon for dark mode */
+  --accent-neon-purple-hover: #643cff;
+  --accent-neon-purple-glow: rgba(124,77,255,0.7);
 
   /* Fonts */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Defaults (will auto-switch in dark/light mode) */
+  /* Defaults (will be assigned to these variables) */
   --bg: var(--bg-light);
   --text: var(--text-light);
+
+  /* Primary accent variables used by the CSS below */
+  --accent: var(--accent-light-orange);
+  --accent-hover: var(--accent-light-orange-hover);
+  --accent-glow: var(--accent-light-orange-glow);
+  --focus-outline: rgba(255,152,0,0.16);
 }
 
 /* Automatic Dark/Light Sync with Browser/OS */
@@ -30,6 +46,12 @@
   :root {
     --bg: var(--bg-dark);
     --text: var(--text-dark);
+
+    /* switch accent to neon purple in dark mode */
+    --accent: var(--accent-neon-purple);
+    --accent-hover: var(--accent-neon-purple-hover);
+    --accent-glow: var(--accent-neon-purple-glow);
+    --focus-outline: rgba(124,77,255,0.16);
   }
 }
 
@@ -37,6 +59,11 @@
   :root {
     --bg: var(--bg-light);
     --text: var(--text-light);
+
+    --accent: var(--accent-light-orange);
+    --accent-hover: var(--accent-light-orange-hover);
+    --accent-glow: var(--accent-light-orange-glow);
+    --focus-outline: rgba(255,152,0,0.16);
   }
 }
 
@@ -54,9 +81,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    font-family: 'Poppins', sans-serif;
-    background: #f5f5f5;
-    color: #222;
+    font-family: var(--font-heading); /* fallback; individual rules override later */
+    /* NOTE: background & color are now driven by CSS variables below */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;  /* font smoothing */
     -moz-osx-font-smoothing: grayscale;
@@ -78,13 +104,13 @@ body {
 }
 
 /* Utility Accent Classes */
-.text-accent-1 { color: var(--accent-1); }
-.text-accent-2 { color: var(--accent-2); }
-.text-accent-3 { color: var(--accent-3); }
+.text-accent-1 { color: var(--accent); }
+.text-accent-2 { color: var(--accent-hover); }
+.text-accent-3 { color: var(--accent-glow); }
 
-.bg-accent-1 { background-color: var(--accent-1); }
-.bg-accent-2 { background-color: var(--accent-2); }
-.bg-accent-3 { background-color: var(--accent-3); }
+.bg-accent-1 { background-color: var(--accent); }
+.bg-accent-2 { background-color: var(--accent-hover); }
+.bg-accent-3 { background-color: var(--accent-glow); }
 
 main {
   flex: 1;
@@ -144,16 +170,16 @@ nav a,
     cursor: pointer;
 }
 
-/* Microanimation: translucent orange box on hover */
+/* Microanimation: translucent accent box on hover (uses theme accent) */
 nav a:hover,
 .nav-links a:hover {
-    background-color: rgba(255, 152, 0, 0.25); /* translucent orange */
-    color: #ff9800; /* orange text */
+    background-color: rgba(255,255,255,0.02); /* subtle base */
+    color: var(--accent);
     transform: scale(1.05);
-    text-shadow: 0 0 8px rgba(255, 152, 0, 0.7); /* subtle glow */
+    text-shadow: 0 0 8px var(--accent-glow);
 }
 
-/* Microanimation: nav underline slide for both selectors */
+/* Microanimation: nav underline slide for both selectors (uses accent) */
 nav a::after,
 .nav-links a::after {
     content: '';
@@ -162,7 +188,7 @@ nav a::after,
     height: 2px;
     bottom: 4px;
     left: 6px;
-    background-color: #ff9800;
+    background-color: var(--accent);
     transition: width 0.3s ease;
     border-radius: 2px;
 }
@@ -175,8 +201,8 @@ nav a:hover::after,
 /* Active link visual (JS will ensure a single .active) */
 nav a.active,
 .nav-links a.active {
-    color: #ff9800;
-    background: rgba(255,152,0,0.06);
+    color: var(--accent);
+    background: rgba(255,255,255,0.02);
     padding: 6px 10px;
     border-radius: 6px;
 }
@@ -215,13 +241,13 @@ nav a.active,
 }
 
 .hero span {
-    color: #ff9800;
+    color: var(--accent); /* CHANGED: use theme accent for name highlight */
 }
 
 /* Microanimation: button float and scale with glow */
 .btn {
     display: inline-block;
-    background: #ff9800;
+    background: var(--accent); /* CHANGED: theme-aware */
     color: white;
     padding: 0.7rem 1.5rem;
     border-radius: 5px;
@@ -245,9 +271,9 @@ nav a.active,
 }
 
 .btn:hover {
-    background: #e68900;
+    background: var(--accent-hover); /* CHANGED */
     transform: translateY(-6px) scale(1.05); /* float up & scale */
-    box-shadow: 0 10px 20px rgba(255, 152, 0, 0.4); /* subtle glow */
+    box-shadow: 0 10px 20px var(--accent-glow); /* CHANGED: glow via variable */
 }
 
 @keyframes bounce {
@@ -268,7 +294,7 @@ h2 {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
-    color: #222;
+    color: var(--text); /* CHANGED: theme-aware heading color */
 }
 
 /* ---------- SKILLS GRID ---------- */
@@ -290,9 +316,9 @@ h2 {
     cursor: default;
 }
 
-/* Microanimation: skill badge glow & scale on hover */
+/* Microanimation: skill badge glow & scale on hover (uses accent glow) */
 .skills-grid span:hover {
-    box-shadow: 0 0 8px 2px rgba(255, 152, 0, 0.6);
+    box-shadow: 0 0 8px 2px var(--accent-glow);
     transform: scale(1.05);
 }
 
@@ -330,7 +356,7 @@ h2 {
 .project-card h3 { margin-bottom: 0.5rem; }
 
 .project-card a {
-    color: #ff9800;
+    color: var(--accent); /* CHANGED: theme-aware project link color */
     text-decoration: none;
     font-weight: 700;
 }
@@ -353,8 +379,8 @@ footer {
 
 /* Microanimation: subtle glow on footer links (if any) */
 footer a:hover {
-    text-shadow: 0 0 6px rgba(255, 152, 0, 0.8);
-    color: #ff9800;
+    text-shadow: 0 0 6px var(--accent-glow);
+    color: var(--accent);
     transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 
@@ -611,7 +637,7 @@ section.visible {
 a:focus,
 button:focus,
 .hamburger:focus {
-    outline: 3px solid rgba(255,152,0,0.16);
+    outline: 3px solid var(--focus-outline); /* CHANGED: theme-aware focus */
     outline-offset: 2px;
     border-radius: 6px;
 }
@@ -621,9 +647,3 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- END OF FILE ---------- */
 /* Your CSS preserved + certificate grid + dropdown + small reveal animations added */
-
-
-
-
-
-
