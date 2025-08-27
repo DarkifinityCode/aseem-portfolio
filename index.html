@@ -11,7 +11,6 @@
 
     <!-- Header -->
     <!-- HEADER / NAVIGATION -->
-    <!-- HEADER / NAVIGATION -->
     <header>
       <nav>
         <div class="logo">Aseem Shukla</div>
@@ -24,12 +23,8 @@
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
 
-        <div class="hamburger" aria-label="menu" role="button" tabindex="0">
-          <div></div>
-          <div></div>
-          <div></div>
-
-          <div class="theme-toggle" id="theme-toggle">
+    <!-- Theme toggle should be OUTSIDE hamburger -->
+        <div class="theme-toggle" id="theme-toggle">
           <div class="sun"></div>
           <div class="moon">
             <div class="crater"></div>
@@ -38,12 +33,15 @@
             </div>
           </div>
         </div>
+
+    <!-- Hamburger menu -->
+        <div class="hamburger" aria-label="menu" role="button" tabindex="0">
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
       </nav>
     </header>
-
-
-
 
     <!-- Home Section -->
     <section id="home" class="hero">
@@ -109,6 +107,7 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+
 
 
 
