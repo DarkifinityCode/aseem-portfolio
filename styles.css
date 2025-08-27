@@ -675,102 +675,240 @@ button:focus,
 img { max-width: 100%; height: auto; display: block; }
 
 /* ========== THEME TOGGLE BUTTON ========== */
+/* REPLACED: Full-featured sunset/moonrise toggle with 3-rotation/rate blink behavior */
+/* Position preserved; animations tied to .theme-toggle.to-dark / .theme-toggle.to-light classes */
+/* idle state supported via both html.dark/html.light and html[data-theme="..."] */
+
 .theme-toggle {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
+  top: 18px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
   cursor: pointer;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 1600;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.theme-toggle .sun,
-.theme-toggle .moon {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: transform 0.8s ease, opacity 0.5s ease;
+/* container for smaller elements */
+.theme-toggle .icon-wrap {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: block;
+  pointer-events: none; /* visual only; clicks handled by button */
 }
 
-/* 🌞 Sun */
+/* Base shapes: sun, rays, moon, stars */
 .theme-toggle .sun {
-  background: var(--accent-light, orange);
-  box-shadow: 0 0 10px orange, 0 0 20px orange;
-}
-.theme-toggle .sun::before {
-  content: '';
   position: absolute;
-  width: 60px;
-  height: 60px;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
   border-radius: 50%;
-  border: 3px solid orange;
-  top: -10px;
-  left: -10px;
-  animation: sun-rays-spin 2s linear infinite paused;
-}
-@keyframes sun-rays-spin {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+  background: var(--accent-light);
+  box-shadow: 0 0 8px rgba(255,152,0,0.65), 0 0 20px rgba(255,152,0,0.18);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
 }
 
-/* 🌙 Moon */
-.theme-toggle .moon {
-  background: var(--accent-dark, purple);
-  box-shadow: 0 0 12px purple, 0 0 25px purple;
-  transform: translateY(60px);
-  opacity: 0;
+/* sun rays element (ring) */
+.theme-toggle .sun-rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  margin-left: -17px;
+  margin-top: -17px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(255,152,0,0.12) inset;
+  border: 2px solid rgba(255,183,77,0.12);
+  transform-origin: center;
+  opacity: 0.95;
 }
+
+/* Moon */
+.theme-toggle .moon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 10px rgba(155,89,255,0.6), 0 0 26px rgba(155,89,255,0.12);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+}
+
+/* moon crater small dot */
 .theme-toggle .moon .crater {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #00000040;
+  width: 5px; height: 5px;
   border-radius: 50%;
-  top: 10px;
-  left: 8px;
+  left: 6px; top: 6px;
+  background: rgba(0,0,0,0.22);
+  filter: blur(.2px);
 }
-.theme-toggle .moon .stars span {
+
+/* stars (3) */
+.theme-toggle .stars {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: white;
+  inset: 0;
+  pointer-events: none;
+}
+.theme-toggle .stars span {
+  position: absolute;
+  width: 4px; height: 4px;
   border-radius: 50%;
-  top: 5px;
-  left: 20px;
+  background: var(--accent-neon);
   opacity: 0;
-  animation: star-blink 1s ease-in-out 3 alternate paused;
-}
-.theme-toggle .moon .stars span:nth-child(2) { top: 15px; left: 28px; }
-.theme-toggle .moon .stars span:nth-child(3) { top: 20px; left: 12px; }
-
-@keyframes star-blink {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  filter: drop-shadow(0 0 6px rgba(155,89,255,0.6));
 }
 
-/* Active states */
+/* place stars around moon */
+.theme-toggle .stars span:nth-child(1) { top: 4px; right: 6px; }
+.theme-toggle .stars span:nth-child(2) { top: 12px; right: 2px; }
+.theme-toggle .stars span:nth-child(3) { top: 18px; left: 6px; }
+
+/* Default idle states:
+   Support both html[data-theme="dark"] and html.dark, same for light. */
+html[data-theme="light"] .theme-toggle .sun,
 html.light .theme-toggle .sun {
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0) scale(1);
 }
+html[data-theme="light"] .theme-toggle .sun-rays,
+html.light .theme-toggle .sun-rays {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+html[data-theme="light"] .theme-toggle .moon,
 html.light .theme-toggle .moon {
-  transform: translateY(60px);
   opacity: 0;
+  transform: translateY(26px) scale(.85);
 }
+html[data-theme="light"] .theme-toggle .stars span,
+html.light .theme-toggle .stars span {
+  opacity: 0;
+  transform: scale(.7);
+}
+
+html[data-theme="dark"] .theme-toggle .sun,
 html.dark .theme-toggle .sun {
-  transform: translateY(-60px);
   opacity: 0;
+  transform: translateY(-26px) scale(.8);
 }
+html[data-theme="dark"] .theme-toggle .sun-rays,
+html.dark .theme-toggle .sun-rays {
+  opacity: 0;
+  transform: rotate(0) scale(.9);
+}
+html[data-theme="dark"] .theme-toggle .moon,
 html.dark .theme-toggle .moon {
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0) scale(1);
 }
+html[data-theme="dark"] .theme-toggle .stars span,
+html.dark .theme-toggle .stars span {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Keyframes for directional movement */
+@keyframes sun-set {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  60%  { transform: translateY(12px) scale(.95); opacity: .95; }
+  100% { transform: translateY(32px) scale(.8); opacity: 0; }
+}
+@keyframes sun-rise {
+  0%   { transform: translateY(-32px) scale(.8); opacity: 0; }
+  60%  { transform: translateY(-8px) scale(.95); opacity: .95; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* rotate rays: we only want 3 rotations when triggered, so we trigger animation with iteration-count:3 */
+@keyframes rays-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes moon-rise {
+  0%   { transform: translateY(32px) scale(.85); opacity: 0; }
+  50%  { transform: translateY(8px) scale(.95); opacity: .95; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes moon-set {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-32px) scale(.85); opacity: 0; }
+}
+
+/* star blink (we will set it to repeat 3 times via animation shorthand) */
+@keyframes star-blink {
+  0% { opacity: 0; transform: scale(.6); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(.8); }
+}
+
+/* transition smoothing for theme surfaces */
+.theme-toggle .sun,
+.theme-toggle .moon,
+.theme-toggle .sun-rays,
+.theme-toggle .stars span {
+  transition: transform 360ms cubic-bezier(.2,.9,.2,1), opacity 360ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Triggered animations: use the to-dark / to-light classes (JS should toggle these) */
+
+/* Going to dark: sun sets, rays spin 3x, moon rises, stars blink 3x */
+.theme-toggle.to-dark .sun {
+  animation: sun-set 900ms ease forwards;
+}
+.theme-toggle.to-dark .sun-rays {
+  /* spin 3 times quickly, start slightly early */
+  animation: rays-spin 300ms linear 140ms 3;
+}
+.theme-toggle.to-dark .moon {
+  animation: moon-rise 900ms cubic-bezier(.2,.9,.2,1) 80ms forwards;
+}
+.theme-toggle.to-dark .stars span {
+  animation: star-blink 260ms ease 760ms 3;
+}
+
+/* Going to light: moon sets, stars blink (reverse), sun rises, rays spin 3x */
+.theme-toggle.to-light .moon {
+  animation: moon-set 900ms ease forwards;
+}
+.theme-toggle.to-light .stars span {
+  /* subtle blink before setting */
+  animation: star-blink 240ms ease 60ms 3;
+}
+.theme-toggle.to-light .sun {
+  animation: sun-rise 900ms cubic-bezier(.2,.9,.2,1) 80ms forwards;
+}
+.theme-toggle.to-light .sun-rays {
+  animation: rays-spin 300ms linear 900ms 3;
+}
+
+/* remove any accidental background box around the button */
+.theme-toggle { background: transparent !important; }
+
+/* Make sure toggle is clickable and aligned with nav: if you use a .right wrapper in nav this will be fine.
+   If your layout differs slightly, tweak top/right values above. */
+
 /* ---------- END OF FILE ---------- */
-/* All original features preserved; surfaces and accents are now theme-aware across all pages */
-
-
+/* All original features preserved; the theme toggle block was replaced to provide accurate sunset/moonrise animations */
