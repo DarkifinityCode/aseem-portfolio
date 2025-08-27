@@ -62,13 +62,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* --------------------
      Lightbox (certificates)
-     Keep your previous behaviour: support .cert-thumb wrappers and raw grid images
      -------------------- */
 
-  // Find an existing #lightbox element (your HTML may already have it)
   let lightbox = document.getElementById('lightbox');
-
-  // If there's no lightbox in DOM, create a simple one that matches your CSS structure
   if (!lightbox) {
     lightbox = document.createElement('div');
     lightbox.id = 'lightbox';
@@ -92,24 +88,20 @@ document.addEventListener("DOMContentLoaded", function() {
     lbImg.src = src;
     lbCaption.textContent = title || '';
     lightbox.classList.remove('hidden');
-    // ensure visible (also CSS anim handles fadeIn)
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    // focus close button for accessibility
     if (lbClose) lbClose.focus();
   }
 
   function closeLightbox() {
     if (!lightbox || !lbImg) return;
     lightbox.classList.add('hidden');
-    // hide after a tick to allow animation reset if any
     lightbox.style.display = 'none';
     lbImg.src = '';
     lbCaption.textContent = '';
     document.body.style.overflow = '';
   }
 
-  // Attach click handlers for existing .cert-thumb elements (older markup)
   const thumbWrappers = document.querySelectorAll('.cert-thumb');
   thumbWrappers.forEach(wrapper => {
     wrapper.addEventListener('click', () => {
@@ -120,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function() {
     wrapper.addEventListener('keypress', (e) => { if (e.key === 'Enter') wrapper.click(); });
   });
 
-  // Also attach click handlers for grid images that use .certificate-grid / .certificates-grid or .cert-grid img
   const gridImages = document.querySelectorAll('.certificate-grid img, .certificates-grid img, .cert-grid img, .cert-grid .cert-thumb img');
   gridImages.forEach(img => {
     img.addEventListener('click', (e) => {
@@ -132,33 +123,19 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   if (lbClose) lbClose.addEventListener('click', closeLightbox);
-
-  // Close when clicking outside the content
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  // Close with Escape
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
   /* --------------------
-     Robust Active Nav Logic — single active only
-     (keeps your previous behaviour but more tolerant)
+     Robust Active Nav Logic
      -------------------- */
-
   (function markActiveNav() {
     const anchors = document.querySelectorAll('.nav-links a, nav ul li a');
     if (!anchors || anchors.length === 0) return;
-
-    // helper: get current page and hash
     const rawPath = window.location.pathname.split('/').pop() || 'index.html';
     const currentPage = rawPath;
     const currentHash = window.location.hash || '';
-
-    // remove existing
     anchors.forEach(a => a.classList.remove('active'));
-
-    // strategy: prefer exact (page + hash) -> page-only -> matching anchor hash -> index
     let matched = null;
 
     anchors.forEach(a => {
@@ -174,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         hrefPath = href;
       }
-
       if (hrefPath && hrefPath === currentPage && hrefHash && hrefHash === currentHash) {
         matched = a;
       }
@@ -239,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* --------------------
      Section fade-in on scroll (IntersectionObserver)
-     (matches the CSS .visible class)
      -------------------- */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -253,5 +228,44 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
   });
+
+  /* --------------------
+     🌞🌙 Theme Toggle (Sunset & Moonrise)
+     -------------------- */
+  const toggle = document.getElementById("theme-toggle");
+  if (toggle) {
+    const html = document.documentElement;
+
+    // check saved theme or fallback to system
+    let theme = localStorage.getItem("theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    html.classList.add(theme);
+
+    toggle.addEventListener("click", () => {
+      if (html.classList.contains("light")) {
+        // switch to dark
+        html.classList.remove("light");
+        html.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+
+        // animate moon & stars
+        const moon = toggle.querySelector(".moon");
+        const stars = toggle.querySelectorAll(".moon .stars span");
+        if (moon) moon.style.animation = "moon-rise 1s ease forwards";
+        stars.forEach(star => star.style.animationPlayState = "running");
+      } else {
+        // switch to light
+        html.classList.remove("dark");
+        html.classList.add("light");
+        localStorage.setItem("theme", "light");
+
+        // animate sun rays
+        const sun = toggle.querySelector(".sun");
+        if (sun) sun.style.animation = "sun-rise 1s ease forwards";
+        const rays = sun ? sun.querySelector("::before") : null;
+        if (rays) rays.style.animationPlayState = "running";
+      }
+    });
+  }
 
 }); // DOMContentLoaded end
