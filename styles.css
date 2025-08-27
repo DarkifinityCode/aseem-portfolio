@@ -674,6 +674,103 @@ button:focus,
 /* tiny tweak: ensure images don't overflow their containers */
 img { max-width: 100%; height: auto; display: block; }
 
+/* ========== THEME TOGGLE BUTTON ========== */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle .sun,
+.theme-toggle .moon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.8s ease, opacity 0.5s ease;
+}
+
+/* 🌞 Sun */
+.theme-toggle .sun {
+  background: var(--accent-light, orange);
+  box-shadow: 0 0 10px orange, 0 0 20px orange;
+}
+.theme-toggle .sun::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid orange;
+  top: -10px;
+  left: -10px;
+  animation: sun-rays-spin 2s linear infinite paused;
+}
+@keyframes sun-rays-spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🌙 Moon */
+.theme-toggle .moon {
+  background: var(--accent-dark, purple);
+  box-shadow: 0 0 12px purple, 0 0 25px purple;
+  transform: translateY(60px);
+  opacity: 0;
+}
+.theme-toggle .moon .crater {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #00000040;
+  border-radius: 50%;
+  top: 10px;
+  left: 8px;
+}
+.theme-toggle .moon .stars span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  top: 5px;
+  left: 20px;
+  opacity: 0;
+  animation: star-blink 1s ease-in-out 3 alternate paused;
+}
+.theme-toggle .moon .stars span:nth-child(2) { top: 15px; left: 28px; }
+.theme-toggle .moon .stars span:nth-child(3) { top: 20px; left: 12px; }
+
+@keyframes star-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Active states */
+html.light .theme-toggle .sun {
+  transform: translateY(0);
+  opacity: 1;
+}
+html.light .theme-toggle .moon {
+  transform: translateY(60px);
+  opacity: 0;
+}
+html.dark .theme-toggle .sun {
+  transform: translateY(-60px);
+  opacity: 0;
+}
+html.dark .theme-toggle .moon {
+  transform: translateY(0);
+  opacity: 1;
+}
 /* ---------- END OF FILE ---------- */
 /* All original features preserved; surfaces and accents are now theme-aware across all pages */
+
 
