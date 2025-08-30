@@ -62,9 +62,10 @@
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Theme toggle specific colors */
+  /* Theme toggle specific colors (tweakable) */
   --sun-core: #FFD54A;
   --sun-core-2: #FFB300;
+  --sun-ring: rgba(255,193,71,0.8);
   --moon-core: #C5D1FF;
   --moon-shadow: #8CA0FF;
   --star: #E7E9FF;
@@ -73,7 +74,7 @@
   --toggle-size: 40px;
   --sun-size: 18px;
   --moon-size: 18px;
-  --rise-distance: 10px; /* how much icons travel up/down */
+  --rise-distance: 12px; /* how much icons travel up/down */
 }
 
 /* Fallback defaults (in case prefers-color-scheme is unavailable) */
@@ -88,6 +89,7 @@
   --accent-glow: var(--accent-light-glow);
   --header-bg: var(--header-bg-light);
   --focus-outline: var(--focus-outline-light);
+  --toggle-stars-enabled: 0; /* default: stars off */
 }
 
 /* Automatic Dark/Light Sync with Browser/OS */
@@ -106,6 +108,7 @@
 
     --header-bg: var(--header-bg-dark);
     --focus-outline: var(--focus-outline-dark);
+    --toggle-stars-enabled: 1;
   }
 }
 
@@ -124,6 +127,7 @@
 
     --header-bg: var(--header-bg-light);
     --focus-outline: var(--focus-outline-light);
+    --toggle-stars-enabled: 0;
   }
 }
 
@@ -143,6 +147,7 @@ html[data-theme="dark"] {
   --accent-glow: var(--accent-neon-glow);
   --header-bg: var(--header-bg-dark);
   --focus-outline: var(--focus-outline-dark);
+  --toggle-stars-enabled: 1;
 }
 
 html[data-theme="light"] {
@@ -156,6 +161,7 @@ html[data-theme="light"] {
   --accent-glow: var(--accent-light-glow);
   --header-bg: var(--header-bg-light);
   --focus-outline: var(--focus-outline-light);
+  --toggle-stars-enabled: 0;
 }
 
 /* ---------- RESET ---------- */
@@ -216,15 +222,25 @@ header {
     transition: background 300ms ease;
 }
 
-/* center nav content inside a fixed width container */
+/* center nav content inside a fixed width container
+   -> changed to flex-start so logo + toggle + links group to left */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 90%;
     margin: auto;
     gap: 12px;
 }
+
+/* make hamburger push to far right */
+.hamburger { margin-left: auto; }
+
+/* ensure ordering: logo (0) -> toggle (1) -> nav-links (2) -> hamburger (3) */
+nav > .logo { order: 0; }
+nav > #theme-toggle { order: 1; }
+nav > .nav-links, nav > ul { order: 2; }
+nav > .hamburger { order: 3; }
 
 /* logo size */
 nav .logo {
@@ -674,7 +690,6 @@ a { color: inherit; text-decoration: none; }
     }
 
     .hamburger {
-        display: flex !entire !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
@@ -686,6 +701,10 @@ a { color: inherit; text-decoration: none; }
         display: block;
         padding: 8px 10px;
     }
+
+    /* Keep toggle visible next to hamburger on mobile */
+    nav > #theme-toggle { order: 2; margin-left: 6px; }
+    nav > .nav-links { order: 3; }
 }
 
 /* ---------- SMALL SCREEN HAMBURGER BARS TWEAK ---------- */
@@ -729,7 +748,7 @@ img { max-width: 100%; height: auto; display: block; }
    - No images required; hides #theme-icon <img>
    - Positions left of nav links (your markup already has it there)
    - Animations match your spec:
-       * light -> dark: sun sets, moon rises, stars blink 3x
+       * light -> dark: sun sets, moon rises, stars blink (approx)
        * dark -> light: moon sets, sun rises + 3 x 45° step spins
    ========================================================= */
 
@@ -739,10 +758,10 @@ img { max-width: 100%; height: auto; display: block; }
 /* Base button layout */
 #theme-toggle {
   --btn-pad: 6px;
-  width: calc(var(--toggle-size) + 4px);
-  height: calc(var(--toggle-size) + 4px);
-  min-width: calc(var(--toggle-size) + 4px);
-  min-height: calc(var(--toggle-size) + 4px);
+  width: calc(var(--toggle-size) + 8px);
+  height: calc(var(--toggle-size) + 8px);
+  min-width: calc(var(--toggle-size) + 8px);
+  min-height: calc(var(--toggle-size) + 8px);
   border: none;
   outline: none;
   background: transparent;
@@ -752,85 +771,74 @@ img { max-width: 100%; height: auto; display: block; }
   cursor: pointer;
   border-radius: 999px;
   isolation: isolate;
-  /* Subtle hover ring */
-  box-shadow: 0 0 0 0 rgba(255,255,255,0);
   transition: box-shadow .25s ease, transform .2s ease, background-color .25s ease;
   margin-left: 8px;   /* sits between logo and nav links */
+  z-index: 1200;
 }
 
+/* Hover */
 #theme-toggle:hover {
   box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
   transform: translateY(-1px);
 }
 
-/* Ensure alignment next to logo + before links */
-nav > #theme-toggle { order: 1; }
-nav > .logo { order: 0; }
-nav > .nav-links, nav > ul { order: 2; }
-
-/* On mobile keep it visible near hamburger */
-@media (max-width: 768px) {
-  nav { gap: 8px; }
-  #theme-toggle { margin-left: 4px; }
-}
-
-/* Sun (disk) — ::before */
+/* The sun (disk + hollow center + rays) is painted via ::before */
 #theme-toggle::before {
   content: "";
   position: absolute;
   width: var(--sun-size);
   height: var(--sun-size);
   border-radius: 50%;
-  /* Golden core + glow ring via layered gradients */
-  background:
-    radial-gradient(circle at 50% 50%, var(--sun-core) 0%, var(--sun-core-2) 65%, rgba(0,0,0,0) 66%),
-    radial-gradient(circle at 50% 50%, rgba(255,203,64,0.35) 0 60%, rgba(255,203,64,0) 61%);
-  box-shadow:
-    0 0 10px 2px rgba(255,193,71,0.35),
-    0 0 22px 6px rgba(255,193,71,0.28);
-  transform: translateY(0) rotate(0deg);
   transform-origin: 50% 50%;
-  z-index: 2;
-  opacity: 1;
+  z-index: 3;
   transition: opacity .35s ease, transform .35s ease;
+  /* disk core (radial) */
+  background: radial-gradient(circle at 50% 50%, var(--sun-core) 0 55%, transparent 56%);
+  /* hollow center ring to create hollow look (uses bg to "cut out") */
+  box-shadow:
+    inset 0 0 0 4px var(--bg), /* hollow center (uses page bg to appear hollow) */
+    0 0 10px 2px rgba(255,193,71,0.25);
+  opacity: 1;
 }
 
-/* Moon (crescent) — ::after */
+/* Create 6 rays using extra box-shadow strokes on ::before */
+#theme-toggle::before {
+  /* additional multi-offset "flat" rays via extra shadows (thin rectangles) */
+  box-shadow:
+    inset 0 0 0 4px var(--bg),
+    0 -14px 0 -8px var(--sun-core),
+    0 14px 0 -8px var(--sun-core),
+    14px 0 0 -8px var(--sun-core),
+    -14px 0 0 -8px var(--sun-core),
+    10px 10px 0 -8px var(--sun-core),
+    -10px -10px 0 -8px var(--sun-core);
+}
+
+/* The moon (crescent) — constructed via layered radial-gradients on ::after */
 #theme-toggle::after {
   content: "";
   position: absolute;
   width: var(--moon-size);
   height: var(--moon-size);
-  transform-origin: 50% 50%;
   border-radius: 50%;
-  /* Crescent constructed from two radial gradients */
-  background:
-    radial-gradient(circle at 50% 50%, var(--moon-core) 0 60%, transparent 61%) ,
-    radial-gradient(circle at 58% 42%, var(--bg) 0 60%, transparent 61%);
-  /* A cool night glow */
-  box-shadow:
-    0 0 14px 2px rgba(140,160,255,0.35),
-    0 0 26px 8px rgba(140,160,255,0.18);
   z-index: 2;
+  transition: opacity .35s ease, transform .35s ease;
+  /* crescent: main moon color then an overlapping circle in page-bg to carve out */
+  background:
+    radial-gradient(circle at 44% 52%, var(--moon-core) 0 60%, transparent 61%),
+    radial-gradient(circle at 64% 42%, var(--bg) 0 58%, transparent 59%);
+  box-shadow:
+    0 0 10px 2px rgba(140,160,255,0.18),
+    0 0 20px 6px rgba(140,160,255,0.12);
   opacity: 0;
   transform: translateY(calc(var(--rise-distance))) rotate(0deg);
-  transition: opacity .35s ease, transform .35s ease;
 }
 
-/* STARFIELD around moon during dark animation:
-   We'll paint stars on the BUTTON’s background using multiple radial-gradients.
-   Default: hidden; toggled via animation classes. */
+/* STARFIELD — implemented as button-level background-images (not filter)
+   We avoid using 'filter: opacity()' on the whole button (which hides pseudos)
+   and instead toggle the background-image presence by theme and class. */
 #theme-toggle {
-  --stars-opacity: 0;
-  background-image:
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px);
   background-repeat: no-repeat;
-  /* star positions */
   background-position:
     8px 6px,
     26px 10px,
@@ -838,23 +846,34 @@ nav > .nav-links, nav > ul { order: 2; }
     30px 22px,
     12px 26px,
     22px 16px;
-  background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
-  /* Control visibility with opacity via a mask-like alpha */
-  filter: opacity(var(--stars-opacity));
+  background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  /* background-image set conditionally for dark theme below */
 }
 
-/* Keep button itself visible even when filter is applied */
-#theme-toggle::before,
-#theme-toggle::after { filter: none; }
+/* When dark theme is active, show star dots (simple 2px radial dots) */
+#theme-toggle[data-theme="dark"] {
+  background-image:
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--star) 0 2px, transparent 3px);
+  background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
+}
+
+/* When light theme, hide stars */
+#theme-toggle[data-theme="light"] {
+  background-image: none;
+  background-size: 0 0;
+}
 
 /* BASE STATES driven by button’s data-theme set by JS */
 #theme-toggle[data-theme="light"]::before { opacity: 1; transform: translateY(0) rotate(0deg); }
 #theme-toggle[data-theme="light"]::after  { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
-#theme-toggle[data-theme="light"]        { --stars-opacity: 0; }
 
 #theme-toggle[data-theme="dark"]::before { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
 #theme-toggle[data-theme="dark"]::after  { opacity: 1; transform: translateY(0) rotate(0deg); }
-#theme-toggle[data-theme="dark"]         { --stars-opacity: 1; }
 
 /* ---------------------------
    ANIMATIONS (triggered by JS)
@@ -865,22 +884,23 @@ nav > .nav-links, nav > ul { order: 2; }
 /* Light -> Dark:
    - Sun sets (down + fade)
    - Moon rises (up + fade in)
-   - Stars blink 3x, then stay */
+   - Stars appear (we show them when data-theme=dark — the JS will toggle classes)
+*/
 #theme-toggle.to-dark::before {
   animation: sun-set 900ms ease forwards;
 }
 #theme-toggle.to-dark::after {
-  animation:
-    moon-rise 900ms ease forwards,
-    none 1ms ease 0s; /* placeholder to ensure combined listing is valid */
+  animation: moon-rise 900ms ease forwards;
 }
 #theme-toggle.to-dark {
-  animation: stars-blink-3 900ms steps(3, end) forwards;
+  /* Add a quick pulse on the button background to hint stars appearing */
+  animation: toggle-pulse 900ms ease forwards;
 }
 
 /* Dark -> Light:
    - Moon sets (down + fade out)
-   - Sun rises (up) + 3 x 45° step rotations (total 135°) */
+   - Sun rises (up) + 3 x 45° step rotations (total 135°)
+*/
 #theme-toggle.to-light::after {
   animation: moon-set 900ms ease forwards;
 }
@@ -888,14 +908,13 @@ nav > .nav-links, nav > ul { order: 2; }
   animation: sun-rise-spin 900ms ease forwards;
 }
 #theme-toggle.to-light {
-  /* Hide stars during the sequence */
-  animation: stars-hide 900ms linear forwards;
+  animation: toggle-pulse-out 900ms linear forwards;
 }
 
 /* Keyframes */
 @keyframes sun-set {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; filter: none; }
+  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; filter: none; }
 }
 @keyframes moon-rise {
   0%   { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
@@ -914,20 +933,16 @@ nav > .nav-links, nav > ul { order: 2; }
   85%  { transform: translateY(0) rotate(135deg); }
   100% { transform: translateY(0) rotate(135deg); }
 }
-/* Stars: blink 3 times then visible */
-@keyframes stars-blink-3 {
-  0%   { --stars-opacity: 0; }
-  16%  { --stars-opacity: 1; }
-  33%  { --stars-opacity: 0; }
-  50%  { --stars-opacity: 1; }
-  66%  { --stars-opacity: 0; }
-  83%  { --stars-opacity: 1; }
-  100% { --stars-opacity: 1; }
+
+/* small pulse to hint stars showing/hiding */
+@keyframes toggle-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+  30%  { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+  100% { box-shadow: none; }
 }
-/* Stars: fade out cleanly during sunrise */
-@keyframes stars-hide {
-  0%   { --stars-opacity: 1; }
-  100% { --stars-opacity: 0; }
+@keyframes toggle-pulse-out {
+  0%   { box-shadow: none; }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
 }
 
 /* Accessibility hover/focus ring for the toggle */
