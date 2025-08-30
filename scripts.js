@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
      Helper selectors
      -------------------- */
 
-  // support both classes/markup variants: ".nav-links" or "nav ul"
   const navMenu = document.querySelector('.nav-links') || document.querySelector('nav ul');
   const menuToggle = document.querySelector('.hamburger') || document.querySelector('.menu-toggle');
 
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
      Mobile menu toggle + accessibility
      -------------------- */
   if (menuToggle && navMenu) {
-    // initialize aria attribute
     menuToggle.setAttribute('role', 'button');
     menuToggle.setAttribute('tabindex', '0');
     menuToggle.setAttribute('aria-expanded', 'false');
@@ -232,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   /* ========================================================
-     THEME TOGGLE — Manual override + Sunset/Moonrise animation
+     THEME TOGGLE — Sunset/Moonrise/Stars + Sunrise/Sunspin
      ======================================================== */
   const htmlEl = document.documentElement;
   const themeBtn = document.getElementById('theme-toggle');
@@ -250,11 +248,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function animateToggle(toTheme) {
     if (!themeBtn) return;
-    themeBtn.classList.remove('to-dark','to-light');
-    themeBtn.offsetWidth; // reflow
+    themeBtn.classList.remove('to-dark', 'to-light');
+    void themeBtn.offsetWidth; // reflow to restart animation
     themeBtn.classList.add(toTheme === 'dark' ? 'to-dark' : 'to-light');
+
     const cleanup = () => {
-      themeBtn.classList.remove('to-dark','to-light');
+      themeBtn.classList.remove('to-dark', 'to-light');
       themeBtn.removeEventListener('animationend', cleanup);
     };
     themeBtn.addEventListener('animationend', cleanup);
@@ -279,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem('theme', next);
     });
 
+    // shift+click to reset saved preference
     themeBtn.addEventListener('click', (e) => {
       if (e.shiftKey) {
         localStorage.removeItem('theme');
