@@ -2,7 +2,7 @@
    THEME-AWARE STYLES (Full file)
    - Preserves all existing layout & interactions
    - Introduces full dark-mode surfaces + strong neon dark accent
-   - Adds CSS-only theme toggle (sun/moon/stars) + animations
+   - Adds theme toggle (with PNG icons + animations)
    - Manual override via html[data-theme="..."] wins over OS
    =============================== */
 
@@ -13,71 +13,57 @@
 :root {
   /* Neutral Colors */
   --bg-light: #f9f9f9;
-  --bg-dark: #0b0b0b;    /* page background in dark mode */
+  --bg-dark: #0b0b0b;
   --text-light: #111111;
   --text-dark: #eaeaea;
 
-  /* Surface (cards, badges, project cards, certificate wrappers) */
-  --surface-light: #ffffff;  /* card bg in light mode */
-  --surface-dark: #111318;   /* card bg in dark mode (darker than page but distinct) */
+  /* Surface */
+  --surface-light: #ffffff;
+  --surface-dark: #111318;
 
   /* Text on surfaces */
   --surface-text-light: #222222;
   --surface-text-dark: #e8e8ee;
 
-  /* Muted text (subtext) */
+  /* Muted text */
   --muted-light: #6b6b6b;
   --muted-dark: #9b9b9b;
 
-  /* Accent palette (light mode) */
-  --accent-light: #ff9800; /* orange */
+  /* Accent palette */
+  --accent-light: #ff9800;
   --accent-light-hover: #e68900;
   --accent-light-glow: rgba(255,152,0,0.72);
 
-  /* Accent palette (dark/neon mode) - strong neon */
-  --accent-neon: #9B59FF; /* bright neon-ish purple (tweakable) */
+  --accent-neon: #9B59FF;
   --accent-neon-hover: #7B39FF;
   --accent-neon-glow: rgba(155,89,255,0.92);
 
-  /* Active accent variables that CSS uses */
   --accent: var(--accent-light);
   --accent-hover: var(--accent-light-hover);
   --accent-glow: var(--accent-light-glow);
 
-  /* Header / nav bg */
+  /* Header */
   --header-bg-light: #222222;
   --header-bg-dark: #111214;
   --header-bg: var(--header-bg-light);
 
-  /* focus outline color */
+  /* focus */
   --focus-outline-light: rgba(255,152,0,0.16);
   --focus-outline-dark: rgba(155,89,255,0.16);
   --focus-outline: var(--focus-outline-light);
 
-  /* small helpers for glow/shadows */
   --accent-glow-big: 0 10px 40px var(--accent-glow);
   --accent-glow-small: 0 6px 18px var(--accent-glow);
 
-  /* fonts */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Theme toggle specific colors (tweakable) */
-  --sun-core: #FFD54A;
-  --sun-core-2: #FFB300;
-  --sun-ring: rgba(255,193,71,0.8);
-  --moon-core: #C5D1FF;
-  --moon-shadow: #8CA0FF;
-  --star: #E7E9FF;
-
   /* Toggle sizes */
   --toggle-size: 40px;
-  --sun-size: 18px;
-  --moon-size: 18px;
-  --rise-distance: 12px; /* how much icons travel up/down */
+  --rise-distance: 12px;
 }
 
-/* Fallback defaults (in case prefers-color-scheme is unavailable) */
+/* Fallback defaults */
 :root {
   --bg: var(--bg-light);
   --text: var(--text-light);
@@ -89,23 +75,19 @@
   --accent-glow: var(--accent-light-glow);
   --header-bg: var(--header-bg-light);
   --focus-outline: var(--focus-outline-light);
-  --toggle-stars-enabled: 0; /* default: stars off */
+  --toggle-stars-enabled: 0;
 }
 
-/* Automatic Dark/Light Sync with Browser/OS */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: var(--bg-dark);
     --text: var(--text-dark);
-
     --surface: var(--surface-dark);
     --surface-text: var(--surface-text-dark);
     --muted: var(--muted-dark);
-
     --accent: var(--accent-neon);
     --accent-hover: var(--accent-neon-hover);
     --accent-glow: var(--accent-neon-glow);
-
     --header-bg: var(--header-bg-dark);
     --focus-outline: var(--focus-outline-dark);
     --toggle-stars-enabled: 1;
@@ -116,15 +98,12 @@
   :root {
     --bg: var(--bg-light);
     --text: var(--text-light);
-
     --surface: var(--surface-light);
     --surface-text: var(--surface-text-light);
     --muted: var(--muted-light);
-
     --accent: var(--accent-light);
     --accent-hover: var(--accent-light-hover);
     --accent-glow: var(--accent-light-glow);
-
     --header-bg: var(--header-bg-light);
     --focus-outline: var(--focus-outline-light);
     --toggle-stars-enabled: 0;
@@ -132,9 +111,7 @@
 }
 
 /* =========================================================
-   Manual Theme Override (wins over prefers-color-scheme)
-   The JS sets <html data-theme="light|dark">.
-   These blocks deliberately sit AFTER media queries for priority.
+   Manual Theme Override
    ========================================================= */
 html[data-theme="dark"] {
   --bg: var(--bg-dark);
@@ -149,7 +126,6 @@ html[data-theme="dark"] {
   --focus-outline: var(--focus-outline-dark);
   --toggle-stars-enabled: 1;
 }
-
 html[data-theme="light"] {
   --bg: var(--bg-light);
   --text: var(--text-light);
@@ -165,177 +141,55 @@ html[data-theme="light"] {
 }
 
 /* ---------- RESET ---------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 /* ---------- BASE ---------- */
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    font-family: var(--font-heading); /* fallback; overrides follow */
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: var(--bg);
-    color: var(--text);
-}
-
-/* ensure body participates in flex layout correctly */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: var(--font-body);
-    transition: background-color 350ms ease, color 350ms ease;
-}
-
-main { flex: 1; }
-
-/* Utility Accent Classes */
-.text-accent-1 { color: var(--accent); }
-.text-accent-2 { color: var(--accent-hover); }
-.text-accent-3 { color: var(--accent-glow); }
-
-.bg-accent-1 { background-color: var(--accent); }
-.bg-accent-2 { background-color: var(--accent-hover); }
-.bg-accent-3 { background-color: var(--accent-glow); }
+html,body{height:100%;margin:0;padding:0;min-height:100%;font-family:var(--font-heading);line-height:1.6;scroll-behavior:smooth;display:flex;flex-direction:column;min-height:100vh;background-color:var(--bg);color:var(--text)}
+body{display:flex;flex-direction:column;min-height:100vh;font-family:var(--font-body);transition:background-color 350ms ease,color 350ms ease}
+main{flex:1}
 
 /* ---------- NAVIGATION ---------- */
-/* header sticky and visible */
-header {
-    background: var(--header-bg);
-    color: white;
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background 300ms ease;
-}
+header{background:var(--header-bg);color:#fff;padding:1rem 0;position:sticky;top:0;z-index:1000;transition:background 300ms ease}
+nav{display:flex;justify-content:flex-start;align-items:center;width:90%;margin:auto;gap:12px}
+.hamburger{margin-left:auto}
+nav>.logo{order:0}
+nav>#theme-toggle{order:1;margin-left:10px}
+nav>.nav-links,nav>ul{order:2}
+nav>.hamburger{order:3}
+nav .logo{font-family:var(--font-heading);font-weight:600;color:#fff}
+nav ul{list-style:none;display:flex;gap:1.5rem;align-items:center}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
 
-/* center nav content inside a fixed width container
-   -> changed to flex-start so logo + toggle + links group to left */
-nav {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 90%;
-    margin: auto;
-    gap: 12px;
-}
+/* ---------- THEME TOGGLE ---------- */
+#theme-toggle{width:var(--toggle-size);height:var(--toggle-size);border:none;background:transparent;position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#theme-toggle img{position:absolute;width:70%;height:70%;object-fit:contain;opacity:0;transition:opacity .6s ease,transform .6s ease}
+#theme-toggle img.sun{content:url("images/Sun.png")}
+#theme-toggle img.moon{content:url("images/Moon.png")}
+#theme-toggle img.stars{content:url("images/Stars.png");width:100%;height:100%}
 
-/* make hamburger push to far right */
-.hamburger { margin-left: auto; }
+/* States */
+#theme-toggle[data-theme="light"] img.sun{opacity:1;transform:translateY(0) rotate(0deg)}
+#theme-toggle[data-theme="light"] img.moon{opacity:0;transform:translateY(var(--rise-distance))}
+#theme-toggle[data-theme="light"] img.stars{opacity:0}
+#theme-toggle[data-theme="dark"] img.sun{opacity:0;transform:translateY(var(--rise-distance))}
+#theme-toggle[data-theme="dark"] img.moon{opacity:1;transform:translateY(0)}
+#theme-toggle[data-theme="dark"] img.stars{opacity:1}
 
-/* ensure ordering: logo (0) -> toggle (1) -> nav-links (2) -> hamburger (3) */
-nav > .logo { order: 0; }
-nav > #theme-toggle { order: 1; }
-nav > .nav-links, nav > ul { order: 2; }
-nav > .hamburger { order: 3; }
+/* Animations (JS adds .to-dark / .to-light) */
+#theme-toggle.to-dark img.sun{animation:sun-set .9s ease forwards}
+#theme-toggle.to-dark img.moon{animation:moon-rise .9s ease forwards}
+#theme-toggle.to-dark img.stars{animation:stars-blink 1.5s ease 1s 1 forwards}
+#theme-toggle.to-light img.moon{animation:moon-set .9s ease forwards}
+#theme-toggle.to-light img.sun{animation:sun-rise-spin 1.2s ease forwards}
+#theme-toggle.to-light img.stars{animation:stars-hide .6s ease forwards}
 
-/* logo size */
-nav .logo {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    color: #fff;
-}
-
-/* nav list styles (desktop default) */
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-/* support both "nav ul" and ".nav-links" selectors */
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-/* anchor defaults used throughout nav */
-nav a,
-.nav-links a {
-    text-decoration: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    transition:
-      background-color 0.25s ease,
-      color 0.25s ease,
-      transform 0.2s ease,
-      text-shadow 0.25s ease;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Microanimation: translucent accent box on hover (uses theme accent) */
-nav a:hover,
-.nav-links a:hover {
-    background-color: rgba(255,255,255,0.02);
-    color: var(--accent);
-    transform: scale(1.04);
-    text-shadow: 0 0 10px var(--accent-glow);
-}
-
-/* Microanimation: nav underline slide for both selectors */
-nav a::after,
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 4px;
-    left: 6px;
-    background-color: var(--accent);
-    transition: width 0.28s ease;
-    border-radius: 2px;
-}
-nav a:hover::after,
-.nav-links a:hover::after {
-    width: calc(100% - 12px);
-}
-
-/* Active link visual (JS ensures a single .active) */
-nav a.active,
-.nav-links a.active {
-    color: var(--accent);
-    background: rgba(255,255,255,0.02);
-    padding: 6px 10px;
-    border-radius: 6px;
-}
-
-/* Hamburger menu (mobile) - hidden on desktop */
-.hamburger {
-    display: none;
-    width: 36px;
-    height: 24px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* Hamburger bars: support both div and span children */
-.hamburger > div,
-.hamburger > span {
-    display: block;
-    height: 3px !important;
-    width: 26px !important;
-    background: #fff !important;
-    margin: 5px 0 !important;
-    border-radius: 2px;
-}
+/* Keyframes */
+@keyframes sun-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
+@keyframes moon-rise{0%{opacity:0;transform:translateY(var(--rise-distance))}100%{opacity:1;transform:translateY(0)}}
+@keyframes moon-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
+@keyframes sun-rise-spin{0%{opacity:0;transform:translateY(var(--rise-distance)) rotate(0)}40%{opacity:1;transform:translateY(0) rotate(0)}60%{transform:translateY(0) rotate(45deg)}80%{transform:translateY(0) rotate(90deg)}100%{transform:translateY(0) rotate(135deg)}}
+@keyframes stars-blink{0%,20%,40%,60%,100%{opacity:1}10%,30%,50%{opacity:0}}
+@keyframes stars-hide{0%{opacity:1}100%{opacity:0}}
 
 /* ---------- HERO ---------- */
 .hero {
@@ -742,222 +596,6 @@ button:focus,
 
 /* tiny tweak: ensure images don't overflow their containers */
 img { max-width: 100%; height: auto; display: block; }
-
-/* =========================================================
-   THEME TOGGLE (CSS-only icon + animations)
-   - No images required; hides #theme-icon <img>
-   - Positions left of nav links (your markup already has it there)
-   - Animations match your spec:
-       * light -> dark: sun sets, moon rises, stars blink (approx)
-       * dark -> light: moon sets, sun rises + 3 x 45° step spins
-   ========================================================= */
-
-/* Hide the old img (we'll draw with CSS) */
-#theme-toggle img#theme-icon { display: none !important; }
-
-/* Base button layout */
-#theme-toggle {
-  --btn-pad: 6px;
-  width: calc(var(--toggle-size) + 8px);
-  height: calc(var(--toggle-size) + 8px);
-  min-width: calc(var(--toggle-size) + 8px);
-  min-height: calc(var(--toggle-size) + 8px);
-  border: none;
-  outline: none;
-  background: transparent;
-  position: relative;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  border-radius: 999px;
-  isolation: isolate;
-  transition: box-shadow .25s ease, transform .2s ease, background-color .25s ease;
-  margin-left: 8px;   /* sits between logo and nav links */
-  z-index: 1200;
-}
-
-/* Hover */
-#theme-toggle:hover {
-  box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
-  transform: translateY(-1px);
-}
-
-/* The sun (disk + hollow center + rays) is painted via ::before */
-#theme-toggle::before {
-  content: "";
-  position: absolute;
-  width: var(--sun-size);
-  height: var(--sun-size);
-  border-radius: 50%;
-  transform-origin: 50% 50%;
-  z-index: 3;
-  transition: opacity .35s ease, transform .35s ease;
-  /* disk core (radial) */
-  background: radial-gradient(circle at 50% 50%, var(--sun-core) 0 55%, transparent 56%);
-  /* hollow center ring to create hollow look (uses bg to "cut out") */
-  box-shadow:
-    inset 0 0 0 4px var(--bg), /* hollow center (uses page bg to appear hollow) */
-    0 0 10px 2px rgba(255,193,71,0.25);
-  opacity: 1;
-}
-
-/* Create 6 rays using extra box-shadow strokes on ::before */
-#theme-toggle::before {
-  /* additional multi-offset "flat" rays via extra shadows (thin rectangles) */
-  box-shadow:
-    inset 0 0 0 4px var(--bg),
-    0 -14px 0 -8px var(--sun-core),
-    0 14px 0 -8px var(--sun-core),
-    14px 0 0 -8px var(--sun-core),
-    -14px 0 0 -8px var(--sun-core),
-    10px 10px 0 -8px var(--sun-core),
-    -10px -10px 0 -8px var(--sun-core);
-}
-
-/* The moon (crescent) — constructed via layered radial-gradients on ::after */
-#theme-toggle::after {
-  content: "";
-  position: absolute;
-  width: var(--moon-size);
-  height: var(--moon-size);
-  border-radius: 50%;
-  z-index: 2;
-  transition: opacity .35s ease, transform .35s ease;
-  /* crescent: main moon color then an overlapping circle in page-bg to carve out */
-  background:
-    radial-gradient(circle at 44% 52%, var(--moon-core) 0 60%, transparent 61%),
-    radial-gradient(circle at 64% 42%, var(--bg) 0 58%, transparent 59%);
-  box-shadow:
-    0 0 10px 2px rgba(140,160,255,0.18),
-    0 0 20px 6px rgba(140,160,255,0.12);
-  opacity: 0;
-  transform: translateY(calc(var(--rise-distance))) rotate(0deg);
-}
-
-/* STARFIELD — implemented as button-level background-images (not filter)
-   We avoid using 'filter: opacity()' on the whole button (which hides pseudos)
-   and instead toggle the background-image presence by theme and class. */
-#theme-toggle {
-  background-repeat: no-repeat;
-  background-position:
-    8px 6px,
-    26px 10px,
-    18px 4px,
-    30px 22px,
-    12px 26px,
-    22px 16px;
-  background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-  /* background-image set conditionally for dark theme below */
-}
-
-/* When dark theme is active, show star dots (simple 2px radial dots) */
-#theme-toggle[data-theme="dark"] {
-  background-image:
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px);
-  background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
-}
-
-/* When light theme, hide stars */
-#theme-toggle[data-theme="light"] {
-  background-image: none;
-  background-size: 0 0;
-}
-
-/* BASE STATES driven by button’s data-theme set by JS */
-#theme-toggle[data-theme="light"]::before { opacity: 1; transform: translateY(0) rotate(0deg); }
-#theme-toggle[data-theme="light"]::after  { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
-
-#theme-toggle[data-theme="dark"]::before { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
-#theme-toggle[data-theme="dark"]::after  { opacity: 1; transform: translateY(0) rotate(0deg); }
-
-/* ---------------------------
-   ANIMATIONS (triggered by JS)
-   Classes added: .to-dark or .to-light on #theme-toggle
-   Duration picked to match JS and page color transition (~900ms)
-   --------------------------- */
-
-/* Light -> Dark:
-   - Sun sets (down + fade)
-   - Moon rises (up + fade in)
-   - Stars appear (we show them when data-theme=dark — the JS will toggle classes)
-*/
-#theme-toggle.to-dark::before {
-  animation: sun-set 900ms ease forwards;
-}
-#theme-toggle.to-dark::after {
-  animation: moon-rise 900ms ease forwards;
-}
-#theme-toggle.to-dark {
-  /* Add a quick pulse on the button background to hint stars appearing */
-  animation: toggle-pulse 900ms ease forwards;
-}
-
-/* Dark -> Light:
-   - Moon sets (down + fade out)
-   - Sun rises (up) + 3 x 45° step rotations (total 135°)
-*/
-#theme-toggle.to-light::after {
-  animation: moon-set 900ms ease forwards;
-}
-#theme-toggle.to-light::before {
-  animation: sun-rise-spin 900ms ease forwards;
-}
-#theme-toggle.to-light {
-  animation: toggle-pulse-out 900ms linear forwards;
-}
-
-/* Keyframes */
-@keyframes sun-set {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; filter: none; }
-  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; filter: none; }
-}
-@keyframes moon-rise {
-  0%   { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-  100% { transform: translateY(0) rotate(0deg); opacity: 1; }
-}
-@keyframes moon-set {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-}
-/* sunrise with stepped rotation: 3 steps x 45deg (135°) total */
-@keyframes sun-rise-spin {
-  0%   { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-  40%  { transform: translateY(0) rotate(0deg); opacity: 1; }
-  55%  { transform: translateY(0) rotate(45deg); }
-  70%  { transform: translateY(0) rotate(90deg); }
-  85%  { transform: translateY(0) rotate(135deg); }
-  100% { transform: translateY(0) rotate(135deg); }
-}
-
-/* small pulse to hint stars showing/hiding */
-@keyframes toggle-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
-  30%  { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-  100% { box-shadow: none; }
-}
-@keyframes toggle-pulse-out {
-  0%   { box-shadow: none; }
-  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
-}
-
-/* Accessibility hover/focus ring for the toggle */
-#theme-toggle:focus-visible {
-  outline: 3px solid var(--focus-outline);
-  outline-offset: 4px;
-}
-
-/* Optional: subtle background chip depending on theme */
-#theme-toggle[data-theme="light"] {
-  background-color: rgba(255, 199, 72, 0.06);
-}
-#theme-toggle[data-theme="dark"] {
-  background-color: rgba(123, 111, 255, 0.06);
-}
 
 /* =========================================================
    EXTRA: Smooth theme transition across the whole page
