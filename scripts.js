@@ -19,11 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const toggleMenu = () => {
       const isOpen = navMenu.classList.toggle('active') || navMenu.classList.toggle('show');
-      // set aria-expanded properly (choose active state)
       const expanded = navMenu.classList.contains('active') || navMenu.classList.contains('show');
       menuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 
-      // prevent horizontal jump on phones
       if (expanded) {
         document.body.style.overflowX = 'hidden';
       } else {
@@ -31,13 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     };
 
-    // click handler
     menuToggle.addEventListener('click', function(e) {
       e.stopPropagation();
       toggleMenu();
     });
 
-    // keyboard toggle (Enter / Space)
     menuToggle.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -45,9 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // click outside to close the mobile menu
     document.addEventListener('click', function(e) {
-      // if menu is open and click is outside menu+toggle, close it
       const open = navMenu.classList.contains('active') || navMenu.classList.contains('show');
       if (!open) return;
       const clickedInsideMenu = navMenu.contains(e.target) || menuToggle.contains(e.target);
@@ -62,13 +56,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* --------------------
      Lightbox (certificates)
-     Keep your previous behaviour: support .cert-thumb wrappers and raw grid images
      -------------------- */
-
-  // Find an existing #lightbox element (your HTML may already have it)
   let lightbox = document.getElementById('lightbox');
 
-  // If there's no lightbox in DOM, create a simple one that matches your CSS structure
   if (!lightbox) {
     lightbox = document.createElement('div');
     lightbox.id = 'lightbox';
@@ -92,24 +82,20 @@ document.addEventListener("DOMContentLoaded", function() {
     lbImg.src = src;
     lbCaption.textContent = title || '';
     lightbox.classList.remove('hidden');
-    // ensure visible (also CSS anim handles fadeIn)
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    // focus close button for accessibility
     if (lbClose) lbClose.focus();
   }
 
   function closeLightbox() {
     if (!lightbox || !lbImg) return;
     lightbox.classList.add('hidden');
-    // hide after a tick to allow animation reset if any
     lightbox.style.display = 'none';
     lbImg.src = '';
     lbCaption.textContent = '';
     document.body.style.overflow = '';
   }
 
-  // Attach click handlers for existing .cert-thumb elements (older markup)
   const thumbWrappers = document.querySelectorAll('.cert-thumb');
   thumbWrappers.forEach(wrapper => {
     wrapper.addEventListener('click', () => {
@@ -120,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function() {
     wrapper.addEventListener('keypress', (e) => { if (e.key === 'Enter') wrapper.click(); });
   });
 
-  // Also attach click handlers for grid images that use .certificate-grid / .certificates-grid or .cert-grid img
   const gridImages = document.querySelectorAll('.certificate-grid img, .certificates-grid img, .cert-grid img, .cert-grid .cert-thumb img');
   gridImages.forEach(img => {
     img.addEventListener('click', (e) => {
@@ -133,32 +118,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (lbClose) lbClose.addEventListener('click', closeLightbox);
 
-  // Close when clicking outside the content
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
 
-  // Close with Escape
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
   /* --------------------
-     Robust Active Nav Logic — single active only
-     (keeps your previous behaviour but more tolerant)
+     Robust Active Nav Logic
      -------------------- */
-
   (function markActiveNav() {
     const anchors = document.querySelectorAll('.nav-links a, nav ul li a');
     if (!anchors || anchors.length === 0) return;
 
-    // helper: get current page and hash
     const rawPath = window.location.pathname.split('/').pop() || 'index.html';
     const currentPage = rawPath;
     const currentHash = window.location.hash || '';
 
-    // remove existing
     anchors.forEach(a => a.classList.remove('active'));
 
-    // strategy: prefer exact (page + hash) -> page-only -> matching anchor hash -> index
     let matched = null;
 
     anchors.forEach(a => {
@@ -216,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function() {
   })();
 
   /* --------------------
-     Close mobile nav on nav link click (UX)
+     Close mobile nav on nav link click
      -------------------- */
   const navAnchors = document.querySelectorAll('.nav-links a, nav ul li a');
   navAnchors.forEach(link => {
@@ -231,21 +209,20 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   /* --------------------
-     Page loaded flag (for CSS fades)
+     Page loaded flag
      -------------------- */
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
   });
 
   /* --------------------
-     Section fade-in on scroll (IntersectionObserver)
-     (matches the CSS .visible class)
+     Section fade-in on scroll
      -------------------- */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // animate once
+        observer.unobserve(entry.target);
       }
     });
   }, {threshold: 0.12});
@@ -257,31 +234,25 @@ document.addEventListener("DOMContentLoaded", function() {
   /* ========================================================
      THEME TOGGLE — Manual override + Sunset/Moonrise animation
      ======================================================== */
-
   const htmlEl = document.documentElement;
   const themeBtn = document.getElementById('theme-toggle');
 
-  // Use saved preference if available; otherwise sync to OS
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+  const saved = localStorage.getItem('theme');
 
   function applyTheme(theme) {
-    htmlEl.setAttribute('data-theme', theme);              // <-- CSS keys off this
+    htmlEl.setAttribute('data-theme', theme);
     if (themeBtn) {
       themeBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-      themeBtn.dataset.theme = theme;                      // for icon idle state
+      themeBtn.dataset.theme = theme;
     }
   }
 
   function animateToggle(toTheme) {
     if (!themeBtn) return;
     themeBtn.classList.remove('to-dark','to-light');
-    // reflow to restart keyframes reliably
-    // eslint-disable-next-line no-unused-expressions
-    themeBtn.offsetWidth;
+    themeBtn.offsetWidth; // reflow
     themeBtn.classList.add(toTheme === 'dark' ? 'to-dark' : 'to-light');
-
-    // Clean up classes when the longest animation finishes (~1s)
     const cleanup = () => {
       themeBtn.classList.remove('to-dark','to-light');
       themeBtn.removeEventListener('animationend', cleanup);
@@ -289,11 +260,9 @@ document.addEventListener("DOMContentLoaded", function() {
     themeBtn.addEventListener('animationend', cleanup);
   }
 
-  // Initial set
   const initial = saved ? saved : (prefersDark.matches ? 'dark' : 'light');
   applyTheme(initial);
 
-  // Keep in sync with OS only if user hasn’t chosen manually
   prefersDark.addEventListener('change', (e) => {
     if (localStorage.getItem('theme')) return;
     const next = e.matches ? 'dark' : 'light';
@@ -301,7 +270,6 @@ document.addEventListener("DOMContentLoaded", function() {
     applyTheme(next);
   });
 
-  // Toggle click
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       const current = htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -311,7 +279,6 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem('theme', next);
     });
 
-    // Optional: Shift+Click clears manual override (returns to OS auto)
     themeBtn.addEventListener('click', (e) => {
       if (e.shiftKey) {
         localStorage.removeItem('theme');
