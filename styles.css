@@ -150,18 +150,18 @@ main{flex:1}
 
 /* ---------- NAVIGATION ---------- */
 header{background:var(--header-bg);color:#fff;padding:1rem 0;position:sticky;top:0;z-index:1000;transition:background 300ms ease}
-nav{display:flex;justify-content:flex-start;align-items:center;width:90%;margin:auto;gap:12px}
+nav{display:flex;justify-content:flex-start;align-items:right;width:90%;margin:auto;gap:12px}
 .hamburger{margin-left:auto}
 nav>.logo{order:0}
 nav>#theme-toggle{order:1;margin-left:10px}
 nav>.nav-links,nav>ul{order:2}
 nav>.hamburger{order:3}
 nav .logo{font-family:var(--font-heading);font-weight:600;color:#fff}
-nav ul{list-style:none;display:flex;gap:1.5rem;align-items:center}
+nav ul{list-style:none;display:flex;gap:1.5rem;align-items:right}
 .nav-links{display:flex;gap:1.5rem;align-items:center}
 
 /* ---------- THEME TOGGLE ---------- */
-#theme-toggle{width:var(--toggle-size);height:var(--toggle-size);border:none;background:transparent;position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#theme-toggle{width:var(--toggle-size);height:var(--toggle-size);border:none;background:transparent;position:relative;cursor:pointer;display:flex;align-items:left;justify-content:left}
 #theme-toggle img{position:absolute;width:70%;height:70%;object-fit:contain;opacity:0;transition:opacity .6s ease,transform .6s ease}
 #theme-toggle img.sun{content:url("images/Sun.png")}
 #theme-toggle img.moon{content:url("images/Moon.png")}
@@ -185,11 +185,11 @@ nav ul{list-style:none;display:flex;gap:1.5rem;align-items:center}
 
 /* Keyframes */
 @keyframes sun-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
-@keyframes moon-rise{0%{opacity:0;transform:translateY(var(--rise-distance))}100%{opacity:1;transform:translateY(0)}}
+@keyframes moon-rise{0%{opacity:1;transform:translateY(var(--rise-distance))}100%{opacity:1;transform:translateY(0)}}
 @keyframes moon-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
-@keyframes sun-rise-spin{0%{opacity:0;transform:translateY(var(--rise-distance)) rotate(0)}40%{opacity:1;transform:translateY(0) rotate(0)}60%{transform:translateY(0) rotate(45deg)}80%{transform:translateY(0) rotate(90deg)}100%{transform:translateY(0) rotate(135deg)}}
-@keyframes stars-blink{0%,20%,40%,60%,100%{opacity:1}10%,30%,50%{opacity:0}}
-@keyframes stars-hide{0%{opacity:1}100%{opacity:0}}
+@keyframes sun-rise-spin{0%{opacity:1;transform:translateY(var(--rise-distance)) rotate(0)}40%{opacity:1;transform:translateY(0) rotate(0)}60%{transform:translateY(0) rotate(45deg)}80%{transform:translateY(0) rotate(90deg)}100%{transform:translateY(0) rotate(135deg)}}
+@keyframes stars-blink{0%,20%,40%,60%,100%{opacity:1}10%,30%,50%{opacity:1}}
+@keyframes stars-hide{0%{opacity:1}100%{opacity:1}}
 
 /* center nav content inside a fixed width container */
 /* center nav content inside a fixed width container
@@ -198,7 +198,7 @@ nav {
 display: flex;
     justify-content: space-between;
     justify-content: flex-start;
-align-items: center;
+align-items: right;
 width: 90%;
 margin: auto;
 gap: 12px;
@@ -225,14 +225,14 @@ nav ul {
 list-style: none;
 display: flex;
 gap: 1.5rem;
-align-items: center;
+align-items: right;
 }
 
 /* support both "nav ul" and ".nav-links" selectors */
 .nav-links {
 display: flex;
 gap: 1.5rem;
-align-items: center;
+align-items: right;
 }
 
 /* anchor defaults used throughout nav */
@@ -1035,4 +1035,5 @@ transition: background-color 350ms ease, color 350ms ease, box-shadow 350ms ease
 /* All original features preserved; surfaces and accents are theme-aware.
   Theme toggle is CSS-only (sun/moon/stars), positioned near the nav,
   animated as specified, and obeys JS manual override. */
+
 
