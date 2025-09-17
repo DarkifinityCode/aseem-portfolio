@@ -214,79 +214,111 @@ nav > .nav-links, nav > ul { order: 2; }
 nav > .hamburger { order: 3; }
 
 /* logo size */
-nav .logo {
-font-family: var(--font-heading);
-font-weight: 600;
-color: #fff;
+header {
+    background: #222;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
+
+/* center nav content inside a fixed width container */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+
+
+/* logo size */
+
+nav h1 {
+    font-size: 1.5rem;
+}
+
 
 /* nav list styles (desktop default) */
+
 nav ul {
-list-style: none;
-display: flex;
-gap: 1.5rem;
-align-items: right;
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
+
 
 /* support both "nav ul" and ".nav-links" selectors */
+
 .nav-links {
-display: flex;
-gap: 1.5rem;
-align-items: right;
+    display: flex;
+    gap: 1.5rem;
 }
+
 
 /* anchor defaults used throughout nav */
+
 nav a,
 .nav-links a {
-text-decoration: none;
-color: white;
-padding: 6px 12px;
-border-radius: 8px;
-transition:
-background-color 0.25s ease,
-color 0.25s ease,
-transform 0.2s ease,
-text-shadow 0.25s ease;
-position: relative;
-cursor: pointer;
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px;
+    /* highlight box padding */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+    /* for underline */
+    cursor: pointer;
 }
 
-/* Microanimation: translucent accent box on hover (uses theme accent) */
+
+/* Microanimation: translucent orange box on hover */
+
 nav a:hover,
 .nav-links a:hover {
-background-color: rgba(255,255,255,0.02);
-color: var(--accent);
-transform: scale(1.04);
-text-shadow: 0 0 10px var(--accent-glow);
+    background-color: rgba(255, 152, 0, 0.25);
+    /* translucent orange */
+    color: #ff9800;
+    /* orange text */
+    transform: scale(1.05);
+    text-shadow: 0 0 8px rgba(255, 152, 0, 0.7);
+    /* subtle glow */
 }
+
 
 /* Microanimation: nav underline slide for both selectors */
+
 nav a::after,
 .nav-links a::after {
-content: '';
-position: absolute;
-width: 0;
-height: 2px;
-bottom: 4px;
-left: 6px;
-background-color: var(--accent);
-transition: width 0.28s ease;
-border-radius: 2px;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 4px;
+    left: 6px;
+    background-color: #ff9800;
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
+
 nav a:hover::after,
 .nav-links a:hover::after {
-width: calc(100% - 12px);
+    width: calc(100% - 12px);
 }
 
-/* Active link visual (JS ensures a single .active) */
+
+/* Active link visual (JS will ensure a single .active) */
+
 nav a.active,
 .nav-links a.active {
-color: var(--accent);
-background: rgba(255,255,255,0.02);
-padding: 6px 10px;
-border-radius: 6px;
+    color: #ff9800;
+    background: rgba(255, 152, 0, 0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
 }
-
 /* Hamburger menu (mobile) - hidden on desktop */
 .hamburger {
 display: none;
@@ -1035,6 +1067,7 @@ transition: background-color 350ms ease, color 350ms ease, box-shadow 350ms ease
 /* All original features preserved; surfaces and accents are theme-aware.
   Theme toggle is CSS-only (sun/moon/stars), positioned near the nav,
   animated as specified, and obeys JS manual override. */
+
 
 
 
