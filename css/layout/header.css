@@ -1,0 +1,21 @@
+header {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+
+nav .logo {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
