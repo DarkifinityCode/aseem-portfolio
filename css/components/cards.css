@@ -1,0 +1,13 @@
+.project-card {
+  background: var(--surface);
+  color: var(--surface-text);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  transition: 0.28s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+}
