@@ -1,4 +1,4 @@
-/* ===============================
+    /* ===============================
    THEME-AWARE STYLES (Full file)
    - Preserves all existing layout & interactions
    - Introduces full dark-mode surfaces + strong neon dark accent
@@ -6,96 +6,59 @@
    - Manual override via html[data-theme="..."] wins over OS
    =============================== */
 
+
 /* ---------- fonts ---------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
 
 /* Root Variables (Design System + Theme-aware accent variables) */
+
 :root {
-  /* Neutral Colors */
-  --bg-light: #f9f9f9;
-  --bg-dark: #0b0b0b;
-  --text-light: #111111;
-  --text-dark: #eaeaea;
-
-  /* Surface */
-  --surface-light: #ffffff;
-  --surface-dark: #111318;
-
-  /* Text on surfaces */
-  --surface-text-light: #222222;
-  --surface-text-dark: #e8e8ee;
-
-  /* Muted text */
-  --muted-light: #6b6b6b;
-  --muted-dark: #9b9b9b;
-
-  /* Accent palette */
-  --accent-light: #ff9800;
-  --accent-light-hover: #e68900;
-  --accent-light-glow: rgba(255,152,0,0.72);
-
-  --accent-neon: #9B59FF;
-  --accent-neon-hover: #7B39FF;
-  --accent-neon-glow: rgba(155,89,255,0.92);
-
-  --accent: var(--accent-light);
-  --accent-hover: var(--accent-light-hover);
-  --accent-glow: var(--accent-light-glow);
-
-  /* Header */
-  --header-bg-light: #222222;
-  --header-bg-dark: #111214;
-  --header-bg: var(--header-bg-light);
-
-  /* focus */
-  --focus-outline-light: rgba(255,152,0,0.16);
-  --focus-outline-dark: rgba(155,89,255,0.16);
-  --focus-outline: var(--focus-outline-light);
-
-  --accent-glow-big: 0 10px 40px var(--accent-glow);
-  --accent-glow-small: 0 6px 18px var(--accent-glow);
-
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
-  /* Toggle sizes */
-  --toggle-size: 40px;
-  --rise-distance: 12px;
+    /* Neutral Colors */
+    --bg-light: #f9f9f9;
+    --bg-dark: #0b0b0b;
+    --text-light: #111111;
+    --text-dark: #eaeaea;
+    /* Surface */
+    --surface-light: #ffffff;
+    --surface-dark: #111318;
+    /* Text on surfaces */
+    --surface-text-light: #222222;
+    --surface-text-dark: #e8e8ee;
+    /* Muted text */
+    --muted-light: #6b6b6b;
+    --muted-dark: #9b9b9b;
+    /* Accent palette */
+    --accent-light: #ff9800;
+    --accent-light-hover: #e68900;
+    --accent-light-glow: rgba(255, 152, 0, 0.72);
+    --accent-neon: #9B59FF;
+    --accent-neon-hover: #7B39FF;
+    --accent-neon-glow: rgba(155, 89, 255, 0.92);
+    --accent: var(--accent-light);
+    --accent-hover: var(--accent-light-hover);
+    --accent-glow: var(--accent-light-glow);
+    /* Header */
+    --header-bg-light: #222222;
+    --header-bg-dark: #111214;
+    --header-bg: var(--header-bg-light);
+    /* focus */
+    --focus-outline-light: rgba(255, 152, 0, 0.16);
+    --focus-outline-dark: rgba(155, 89, 255, 0.16);
+    --focus-outline: var(--focus-outline-light);
+    --accent-glow-big: 0 10px 40px var(--accent-glow);
+    --accent-glow-small: 0 6px 18px var(--accent-glow);
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    /* Toggle sizes */
+    --toggle-size: 40px;
+    --rise-distance: 12px;
 }
+
 
 /* Fallback defaults */
+
 :root {
-  --bg: var(--bg-light);
-  --text: var(--text-light);
-  --surface: var(--surface-light);
-  --surface-text: var(--surface-text-light);
-  --muted: var(--muted-light);
-  --accent: var(--accent-light);
-  --accent-hover: var(--accent-light-hover);
-  --accent-glow: var(--accent-light-glow);
-  --header-bg: var(--header-bg-light);
-  --focus-outline: var(--focus-outline-light);
-  --toggle-stars-enabled: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: var(--bg-dark);
-    --text: var(--text-dark);
-    --surface: var(--surface-dark);
-    --surface-text: var(--surface-text-dark);
-    --muted: var(--muted-dark);
-    --accent: var(--accent-neon);
-    --accent-hover: var(--accent-neon-hover);
-    --accent-glow: var(--accent-neon-glow);
-    --header-bg: var(--header-bg-dark);
-    --focus-outline: var(--focus-outline-dark);
-    --toggle-stars-enabled: 1;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
     --bg: var(--bg-light);
     --text: var(--text-light);
     --surface: var(--surface-light);
@@ -107,113 +70,399 @@
     --header-bg: var(--header-bg-light);
     --focus-outline: var(--focus-outline-light);
     --toggle-stars-enabled: 0;
-  }
 }
+
+@media (prefers-color-scheme: dark) {
+     :root {
+        --bg: var(--bg-dark);
+        --text: var(--text-dark);
+        --surface: var(--surface-dark);
+        --surface-text: var(--surface-text-dark);
+        --muted: var(--muted-dark);
+        --accent: var(--accent-neon);
+        --accent-hover: var(--accent-neon-hover);
+        --accent-glow: var(--accent-neon-glow);
+        --header-bg: var(--header-bg-dark);
+        --focus-outline: var(--focus-outline-dark);
+        --toggle-stars-enabled: 1;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+     :root {
+        --bg: var(--bg-light);
+        --text: var(--text-light);
+        --surface: var(--surface-light);
+        --surface-text: var(--surface-text-light);
+        --muted: var(--muted-light);
+        --accent: var(--accent-light);
+        --accent-hover: var(--accent-light-hover);
+        --accent-glow: var(--accent-light-glow);
+        --header-bg: var(--header-bg-light);
+        --focus-outline: var(--focus-outline-light);
+        --toggle-stars-enabled: 0;
+    }
+}
+
 
 /* =========================================================
    Manual Theme Override
    ========================================================= */
+
 html[data-theme="dark"] {
-  --bg: var(--bg-dark);
-  --text: var(--text-dark);
-  --surface: var(--surface-dark);
-  --surface-text: var(--surface-text-dark);
-  --muted: var(--muted-dark);
-  --accent: var(--accent-neon);
-  --accent-hover: var(--accent-neon-hover);
-  --accent-glow: var(--accent-neon-glow);
-  --header-bg: var(--header-bg-dark);
-  --focus-outline: var(--focus-outline-dark);
-  --toggle-stars-enabled: 1;
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+    --surface: var(--surface-dark);
+    --surface-text: var(--surface-text-dark);
+    --muted: var(--muted-dark);
+    --accent: var(--accent-neon);
+    --accent-hover: var(--accent-neon-hover);
+    --accent-glow: var(--accent-neon-glow);
+    --header-bg: var(--header-bg-dark);
+    --focus-outline: var(--focus-outline-dark);
+    --toggle-stars-enabled: 1;
 }
+
 html[data-theme="light"] {
-  --bg: var(--bg-light);
-  --text: var(--text-light);
-  --surface: var(--surface-light);
-  --surface-text: var(--surface-text-light);
-  --muted: var(--muted-light);
-  --accent: var(--accent-light);
-  --accent-hover: var(--accent-light-hover);
-  --accent-glow: var(--accent-light-glow);
-  --header-bg: var(--header-bg-light);
-  --focus-outline: var(--focus-outline-light);
-  --toggle-stars-enabled: 0;
+    --bg: var(--bg-light);
+    --text: var(--text-light);
+    --surface: var(--surface-light);
+    --surface-text: var(--surface-text-light);
+    --muted: var(--muted-light);
+    --accent: var(--accent-light);
+    --accent-hover: var(--accent-light-hover);
+    --accent-glow: var(--accent-light-glow);
+    --header-bg: var(--header-bg-light);
+    --focus-outline: var(--focus-outline-light);
+    --toggle-stars-enabled: 0;
 }
+
 
 /* ---------- RESET ---------- */
-*{margin:0;padding:0;box-sizing:border-box}
 
-/* ---------- BASE ---------- */
-html,body{height:100%;margin:0;padding:0;min-height:100%;font-family:var(--font-heading);line-height:1.6;scroll-behavior:smooth;display:flex;flex-direction:column;min-height:100vh;background-color:var(--bg);color:var(--text)}
-body{display:flex;flex-direction:column;min-height:100vh;font-family:var(--font-body);transition:background-color 350ms ease,color 350ms ease}
-main{flex:1}
-
-/* ---------- NAVIGATION ---------- */
-header{background:var(--header-bg);color:#fff;padding:1rem 0;position:sticky;top:0;z-index:1000;transition:background 300ms ease}
-nav{display:flex;justify-content:flex-start;align-items:right;width:90%;margin:auto;gap:12px}
-.hamburger{margin-left:auto}
-nav>.logo{order:0}
-nav>#theme-toggle{order:1;margin-left:10px}
-nav>.nav-links,nav>ul{order:2}
-nav>.hamburger{order:3}
-nav .logo{font-family:var(--font-heading);font-weight:600;color:#fff}
-nav ul{list-style:none;display:flex;gap:1.5rem;align-items:right}
-.nav-links{display:flex;gap:1.5rem;align-items:center}
-
-/* ---------- THEME TOGGLE ---------- */
-#theme-toggle{width:var(--toggle-size);height:var(--toggle-size);border:none;background:transparent;position:relative;cursor:pointer;display:flex;align-items:left;justify-content:left}
-#theme-toggle img{position:absolute;width:70%;height:70%;object-fit:contain;opacity:0;transition:opacity .6s ease,transform .6s ease}
-#theme-toggle img.sun{content:url("images/Sun.png")}
-#theme-toggle img.moon{content:url("images/Moon.png")}
-#theme-toggle img.stars{content:url("images/Stars.png");width:100%;height:100%}
-
-/* States */
-#theme-toggle[data-theme="light"] img.sun{opacity:1;transform:translateY(0) rotate(0deg)}
-#theme-toggle[data-theme="light"] img.moon{opacity:0;transform:translateY(var(--rise-distance))}
-#theme-toggle[data-theme="light"] img.stars{opacity:0}
-#theme-toggle[data-theme="dark"] img.sun{opacity:0;transform:translateY(var(--rise-distance))}
-#theme-toggle[data-theme="dark"] img.moon{opacity:1;transform:translateY(0)}
-#theme-toggle[data-theme="dark"] img.stars{opacity:1}
-
-/* Animations (JS adds .to-dark / .to-light) */
-#theme-toggle.to-dark img.sun{animation:sun-set .9s ease forwards}
-#theme-toggle.to-dark img.moon{animation:moon-rise .9s ease forwards}
-#theme-toggle.to-dark img.stars{animation:stars-blink 1.5s ease 1s 1 forwards}
-#theme-toggle.to-light img.moon{animation:moon-set .9s ease forwards}
-#theme-toggle.to-light img.sun{animation:sun-rise-spin 1.2s ease forwards}
-#theme-toggle.to-light img.stars{animation:stars-hide .6s ease forwards}
-
-/* Keyframes */
-@keyframes sun-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
-@keyframes moon-rise{0%{opacity:1;transform:translateY(var(--rise-distance))}100%{opacity:1;transform:translateY(0)}}
-@keyframes moon-set{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--rise-distance))}}
-@keyframes sun-rise-spin{0%{opacity:1;transform:translateY(var(--rise-distance)) rotate(0)}40%{opacity:1;transform:translateY(0) rotate(0)}60%{transform:translateY(0) rotate(45deg)}80%{transform:translateY(0) rotate(90deg)}100%{transform:translateY(0) rotate(135deg)}}
-@keyframes stars-blink{0%,20%,40%,60%,100%{opacity:1}10%,30%,50%{opacity:1}}
-@keyframes stars-hide{0%{opacity:1}100%{opacity:1}}
-
-/* center nav content inside a fixed width container */
-/* center nav content inside a fixed width container
-   -> changed to flex-start so logo + toggle + links group to left */
-nav {
-display: flex;
-    justify-content: space-between;
-    justify-content: flex-start;
-align-items: right;
-width: 90%;
-margin: auto;
-gap: 12px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
 }
 
+
+/* ---------- BASE ---------- */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: var(--font-heading);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text)
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    transition: background-color 350ms ease, color 350ms ease
+}
+
+main {
+    flex: 1
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+header {
+    background: var(--header-bg);
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background 300ms ease
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: right;
+    width: 90%;
+    margin: auto;
+    gap: 12px
+}
+
+.hamburger {
+    margin-left: auto
+}
+
+nav>.logo {
+    order: 0
+}
+
+nav>#theme-toggle {
+    order: 1;
+    margin-left: 10px
+}
+
+nav>.nav-links,
+nav>ul {
+    order: 2
+}
+
+nav>.hamburger {
+    order: 3
+}
+
+nav .logo {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: #fff
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: right
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center
+}
+
+
+/* ---------- THEME TOGGLE ---------- */
+
+#theme-toggle {
+    width: var(--toggle-size);
+    height: var(--toggle-size);
+    border: none;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: left;
+    justify-content: left
+}
+
+#theme-toggle img {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity .6s ease, transform .6s ease
+}
+
+#theme-toggle img.sun {
+    content: url("images/Sun.png")
+}
+
+#theme-toggle img.moon {
+    content: url("images/Moon.png")
+}
+
+#theme-toggle img.stars {
+    content: url("images/Stars.png");
+    width: 100%;
+    height: 100%
+}
+
+
+/* States */
+
+#theme-toggle[data-theme="light"] img.sun {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg)
+}
+
+#theme-toggle[data-theme="light"] img.moon {
+    opacity: 0;
+    transform: translateY(var(--rise-distance))
+}
+
+#theme-toggle[data-theme="light"] img.stars {
+    opacity: 0
+}
+
+#theme-toggle[data-theme="dark"] img.sun {
+    opacity: 0;
+    transform: translateY(var(--rise-distance))
+}
+
+#theme-toggle[data-theme="dark"] img.moon {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+#theme-toggle[data-theme="dark"] img.stars {
+    opacity: 1
+}
+
+
+/* Animations (JS adds .to-dark / .to-light) */
+
+#theme-toggle.to-dark img.sun {
+    animation: sun-set .9s ease forwards
+}
+
+#theme-toggle.to-dark img.moon {
+    animation: moon-rise .9s ease forwards
+}
+
+#theme-toggle.to-dark img.stars {
+    animation: stars-blink 1.5s ease 1s 1 forwards
+}
+
+#theme-toggle.to-light img.moon {
+    animation: moon-set .9s ease forwards
+}
+
+#theme-toggle.to-light img.sun {
+    animation: sun-rise-spin 1.2s ease forwards
+}
+
+#theme-toggle.to-light img.stars {
+    animation: stars-hide .6s ease forwards
+}
+
+
+/* Keyframes */
+
+@keyframes sun-set {
+    0% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(var(--rise-distance))
+    }
+}
+
+@keyframes moon-rise {
+    0% {
+        opacity: 1;
+        transform: translateY(var(--rise-distance))
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes moon-set {
+    0% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(var(--rise-distance))
+    }
+}
+
+@keyframes sun-rise-spin {
+    0% {
+        opacity: 1;
+        transform: translateY(var(--rise-distance)) rotate(0)
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(0) rotate(0)
+    }
+    60% {
+        transform: translateY(0) rotate(45deg)
+    }
+    80% {
+        transform: translateY(0) rotate(90deg)
+    }
+    100% {
+        transform: translateY(0) rotate(135deg)
+    }
+}
+
+@keyframes stars-blink {
+    0%,
+    20%,
+    40%,
+    60%,
+    100% {
+        opacity: 1
+    }
+    10%,
+    30%,
+    50% {
+        opacity: 1
+    }
+}
+
+@keyframes stars-hide {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+
+/* center nav content inside a fixed width container */
+
+
+/* center nav content inside a fixed width container
+   -> changed to flex-start so logo + toggle + links group to left */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: right;
+    width: 90%;
+    margin: auto;
+    gap: 12px;
+}
+
+
 /* make hamburger push to far right */
-.hamburger { margin-left: auto; }
+
+.hamburger {
+    margin-left: auto;
+}
+
 
 /* ensure ordering: logo (0) -> toggle (1) -> nav-links (2) -> hamburger (3) */
-nav > .logo { order: 0; }
-nav > #theme-toggle { order: 1; }
-nav > .nav-links, nav > ul { order: 2; }
-nav > .hamburger { order: 3; }
+
+nav>.logo {
+    order: 0;
+}
+
+nav>#theme-toggle {
+    order: 1;
+}
+
+nav>.nav-links,
+nav>ul {
+    order: 2;
+}
+
+nav>.hamburger {
+    order: 3;
+}
+
 
 /* logo size */
+
 header {
     background: #222;
     color: white;
@@ -319,433 +568,537 @@ nav a.active,
     padding: 6px 10px;
     border-radius: 6px;
 }
+
+
 /* Hamburger menu (mobile) - hidden on desktop */
+
 .hamburger {
-display: none;
-width: 36px;
-height: 24px;
-justify-content: center;
-align-items: center;
-cursor: pointer;
+    display: none;
+    width: 36px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
+
 
 /* Hamburger bars: support both div and span children */
-.hamburger > div,
-.hamburger > span {
-display: block;
-height: 3px !important;
-width: 26px !important;
-background: #fff !important;
-margin: 5px 0 !important;
-border-radius: 2px;
+
+.hamburger>div,
+.hamburger>span {
+    display: block;
+    height: 3px !important;
+    width: 26px !important;
+    background: #fff !important;
+    margin: 5px 0 !important;
+    border-radius: 2px;
 }
 
+
 /* ---------- HERO ---------- */
+
 .hero {
-background: linear-gradient(to right, #222, #444);
-color: white;
-text-align: center;
-padding: 5rem 1rem;
-transition: background 350ms ease;
+    background: linear-gradient(to right, #222, #444);
+    color: white;
+    text-align: center;
+    padding: 5rem 1rem;
+    transition: background 350ms ease;
 }
 
 .hero h2 {
-font-size: 2.5rem;
-font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-family: var(--font-heading);
 }
 
 .hero span {
-color: var(--accent); /* CHANGED: theme-aware */
-text-shadow: 0 3px 18px var(--accent-glow);
+    color: var(--accent);
+    /* CHANGED: theme-aware */
+    text-shadow: 0 3px 18px var(--accent-glow);
 }
+
 
 /* Microanimation: button float and scale with glow */
+
 .btn {
-display: inline-block;
-background: var(--accent); /* CHANGED: theme-aware */
-color: white;
-padding: 0.7rem 1.5rem;
-border-radius: 6px;
-text-decoration: none;
-transition: background 0.22s, transform 0.22s ease, box-shadow 0.22s ease;
-font-weight: 700;
-position: relative;
-box-shadow: var(--accent-glow-small);
+    display: inline-block;
+    background: var(--accent);
+    /* CHANGED: theme-aware */
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.22s, transform 0.22s ease, box-shadow 0.22s ease;
+    font-weight: 700;
+    position: relative;
+    box-shadow: var(--accent-glow-small);
 }
+
 
 /* Additional microanimation: bouncing arrow after text (consider reducing frequency later) */
+
 .btn::after {
-content: "↓";
-display: inline-block;
-margin-left: 8px;
-animation: bounce 1.6s infinite ease-in-out;
-opacity: 0.85;
+    content: "↓";
+    display: inline-block;
+    margin-left: 8px;
+    animation: bounce 1.6s infinite ease-in-out;
+    opacity: 0.85;
 }
-.btn:hover::after { animation-play-state: paused; }
+
+.btn:hover::after {
+    animation-play-state: paused;
+}
 
 .btn:hover {
-background: var(--accent-hover);
-transform: translateY(-6px) scale(1.03);
-box-shadow: var(--accent-glow-big);
+    background: var(--accent-hover);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: var(--accent-glow-big);
 }
+
 
 /* ---------- SECTIONS ---------- */
+
+
 /* default section width and spacing */
+
 section {
-width: 90%;
-margin: auto;
-padding: 3rem 0;
+    width: 90%;
+    margin: auto;
+    padding: 3rem 0;
 }
+
 
 /* headings */
+
 h2 {
-text-align: center;
-margin-bottom: 2rem;
-font-size: 2rem;
-color: var(--text);
-font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--text);
+    font-family: var(--font-heading);
 }
 
+
 /* ---------- SKILLS GRID ---------- */
+
 .skills-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-gap: 1rem;
-text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    text-align: center;
 }
 
 .skills-grid span {
-background: var(--surface); /* CHANGED: theme-aware surfaces */
-color: var(--surface-text);
-padding: 1rem;
-border-radius: 8px;
-box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-font-weight: 600;
-transition: box-shadow 0.28s ease, transform 0.28s ease;
-cursor: default;
+    background: var(--surface);
+    /* CHANGED: theme-aware surfaces */
+    color: var(--surface-text);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    transition: box-shadow 0.28s ease, transform 0.28s ease;
+    cursor: default;
 }
+
 
 /* Microanimation: skill badge glow & scale on hover (uses accent glow) */
+
 .skills-grid span:hover {
-box-shadow: 0 0 18px 6px var(--accent-glow);
-transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 0 18px 6px var(--accent-glow);
+    transform: translateY(-4px) scale(1.03);
 }
 
+
 /* ---------- PROJECT GRID ---------- */
+
 .project-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
 }
 
 .project-card {
-background: var(--surface); /* CHANGED: theme-aware surface */
-color: var(--surface-text);
-padding: 1.5rem;
-border-radius: 8px;
-box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-display: flex;
-flex-direction: column;
-transition: transform 0.28s ease, box-shadow 0.28s ease;
+    background: var(--surface);
+    /* CHANGED: theme-aware surface */
+    color: var(--surface-text);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
 
+
 /* Microanimation: project card lift */
+
 .project-card:hover {
-transform: translateY(-10px);
-box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
 }
 
 .project-card img {
-width: 100%;
-height: auto;
-border-radius: 6px;
-object-fit: cover;
-margin-bottom: 1rem;
-background: var(--surface); /* ensures image wrapper matches surface */
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    background: var(--surface);
+    /* ensures image wrapper matches surface */
 }
 
-.project-card h3 { margin-bottom: 0.5rem; color: var(--surface-text); }
+.project-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--surface-text);
+}
 
-.project-card p { color: var(--muted); }
+.project-card p {
+    color: var(--muted);
+}
 
 .project-card a {
-color: var(--accent); /* CHANGED: theme-aware project link color */
-text-decoration: none;
-font-weight: 700;
-transition: color 0.22s ease, text-shadow 0.22s ease;
+    color: var(--accent);
+    /* CHANGED: theme-aware project link color */
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.22s ease, text-shadow 0.22s ease;
 }
-.project-card a:hover { 
-text-decoration: underline;
-text-shadow: 0 6px 28px var(--accent-glow);
+
+.project-card a:hover {
+    text-decoration: underline;
+    text-shadow: 0 6px 28px var(--accent-glow);
 }
+
 
 /* ---------- CONTACT ---------- */
+
 #contact p {
-text-align: center;
-margin-bottom: 1rem;
-margin-left: 1rem;
-color: var(--surface-text);
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    color: var(--surface-text);
 }
+
 
 /* ---------- FOOTER ---------- */
+
 footer {
-text-align: center;
-padding: 1rem;
-background: var(--header-bg);
-color: #fff;
-transition: background 300ms ease;
+    text-align: center;
+    padding: 1rem;
+    background: var(--header-bg);
+    color: #fff;
+    transition: background 300ms ease;
 }
+
 
 /* Microanimation: subtle glow on footer links (if any) */
+
 footer a:hover {
-text-shadow: 0 0 8px var(--accent-glow);
-color: var(--accent);
-transition: text-shadow 0.3s ease, color 0.3s ease;
+    text-shadow: 0 0 8px var(--accent-glow);
+    color: var(--accent);
+    transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 
+
 /* ---------- LIGHTBOX SUPPORT ---------- */
+
 .lightbox {
-position: fixed;
-inset: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-background: rgba(0,0,0,0.86);
-z-index: 2000;
-opacity: 0;
-animation-fill-mode: forwards;
-animation-duration: 0.35s;
-animation-name: fadeIn;
-animation-timing-function: ease-in-out;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.86);
+    z-index: 2000;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 0.35s;
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
 }
 
 .lightbox.hidden {
-display: none;
-opacity: 0;
-animation-name: none;
+    display: none;
+    opacity: 0;
+    animation-name: none;
 }
 
 @keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .lightbox-content {
-max-width: 92%;
-max-height: 86%;
-position: relative;
+    max-width: 92%;
+    max-height: 86%;
+    position: relative;
 }
 
 .lightbox-content img {
-max-width: 100%;
-max-height: calc(100vh - 160px);
-border-radius: 6px;
-display: block;
-background: var(--surface);
+    max-width: 100%;
+    max-height: calc(100vh - 160px);
+    border-radius: 6px;
+    display: block;
+    background: var(--surface);
 }
 
 .lightbox-caption {
-color: #fff;
-text-align: center;
-margin-top: 10px;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .lightbox-close {
-position: absolute;
-top: -16px;
-right: -16px;
-width: 40px;
-height: 40px;
-background: #fff;
-border-radius: 50%;
-border: none;
-cursor: pointer;
-font-size: 18px;
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
 }
 
+
 /* ---------- ANCHOR NORMALIZATION ---------- */
-a { color: inherit; text-decoration: none; }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 
 /* ---------- CERTIFICATE GRID (UPDATED) ---------- */
+
 .certificate-grid,
 .certificates-grid,
 .cert-grid {
-display: grid;
-gap: 18px;
-grid-template-columns: repeat(3, 1fr);
-width: 100%;
-align-items: start;
-margin: 0;
-padding: 0;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    align-items: start;
+    margin: 0;
+    padding: 0;
 }
 
+
 /* Thumbnail images — uniform height for consistency */
+
 .certificate-grid img,
 .certificates-grid img,
 .cert-grid .cert-thumb img,
 .cert-grid img,
 .cert-thumb img {
-width: 100%;
-height: 200px;
-object-fit: contain;
-background-color: var(--surface); /* theme-aware thumb background */
-border-radius: 8px;
-display: block;
-cursor: pointer;
-transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: var(--surface);
+    /* theme-aware thumb background */
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
+
 /* Hover grow effect */
+
 .certificate-grid img:hover,
 .certificates-grid img:hover,
 .cert-grid .cert-thumb img:hover,
 .cert-grid img:hover,
 .cert-thumb img:hover {
-transform: scale(1.04);
-box-shadow: 0 16px 44px rgba(0,0,0,0.32);
+    transform: scale(1.04);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.32);
 }
+
 
 /* Wrapper for certificates */
+
 .cert-thumb {
-position: relative;
-border-radius: 8px;
-overflow: hidden;
-background: var(--surface);
-box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
 }
 
+
 /* Overlay label for certificate thumbnails */
+
 .cert-thumb .cert-overlay,
 .certificate-grid .cert-overlay,
 .certificates-grid .cert-overlay {
-position: absolute;
-left: 0;
-right: 0;
-bottom: 0;
-padding: 0.6rem;
-background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-color: #fff;
-font-weight: 700;
-pointer-events: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.6rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+    color: #fff;
+    font-weight: 700;
+    pointer-events: none;
 }
 
+
 /* Reveal animation */
+
 @keyframes certFadeUp {
-from { opacity: 0; transform: translateY(10px); }
-to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .certificate-grid .cert-item,
 .certificates-grid .cert-item,
 .cert-grid .cert-item,
 .cert-thumb {
-animation: certFadeUp 400ms ease both;
+    animation: certFadeUp 400ms ease both;
 }
+
 
 /* Mobile: 2 columns */
+
 @media (max-width: 768px) {
-.certificate-grid,
-.certificates-grid,
-.cert-grid {
-grid-template-columns: repeat(2, 1fr);
-gap: 12px;
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
 }
-}
+
 
 /* Very small screens: 1 column */
+
 @media (max-width: 420px) {
-.certificate-grid,
-.certificates-grid,
-.cert-grid {
-grid-template-columns: 1fr;
+    .certificate-grid,
+    .certificates-grid,
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
 }
-}
+
 
 /* ---------- MOBILE NAV / DROPDOWN POLISH (IMPROVED) ---------- */
+
 @media (max-width: 768px) {
-nav ul,
-.nav-links {
-display: none !important;
-flex-direction: column;
-background: #1a1a1a;
-position: absolute;
-top: 64px;
-right: 16px;
-width: 220px;
-padding: 12px;
-border-radius: 8px;
-gap: 12px;
-box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-z-index: 1500;
-}
-
-nav ul.active,
-nav ul.show,
-.nav-links.active,
-.nav-links.show {
-display: flex !important;
-animation: dropdown 260ms ease;
-}
-
-@keyframes dropdown {
-from { opacity: 0; transform: translateY(-6px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.hamburger {
+    nav ul,
+    .nav-links {
+        display: none !important;
+        flex-direction: column;
+        background: #1a1a1a;
+        position: absolute;
+        top: 64px;
+        right: 16px;
+        width: 220px;
+        padding: 12px;
+        border-radius: 8px;
+        gap: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        z-index: 1500;
+    }
+    nav ul.active,
+    nav ul.show,
+    .nav-links.active,
+    .nav-links.show {
+        display: flex !important;
+        animation: dropdown 260ms ease;
+    }
+    @keyframes dropdown {
+        from {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .hamburger {
         display: flex !entire !important;
-display: flex !important;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-}
-
-nav ul li a,
-.nav-links li a {
-display: block;
-padding: 8px 10px;
-}
-
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    nav ul li a,
+    .nav-links li a {
+        display: block;
+        padding: 8px 10px;
+    }
     /* Keep toggle visible next to hamburger on mobile */
-    nav > #theme-toggle { order: 2; margin-left: 6px; }
-    nav > .nav-links { order: 3; }
+    nav>#theme-toggle {
+        order: 2;
+        margin-left: 6px;
+    }
+    nav>.nav-links {
+        order: 3;
+    }
 }
+
 
 /* ---------- SMALL SCREEN HAMBURGER BARS TWEAK ---------- */
+
 @media (max-width: 480px) {
-.hamburger > div,
-.hamburger > span {
-width: 22px !important;
-height: 3px !important;
-margin: 4px 0 !important;
-}
+    .hamburger>div,
+    .hamburger>span {
+        width: 22px !important;
+        height: 3px !important;
+        margin: 4px 0 !important;
+    }
 }
 
+
 /* ---------- PAGE TRANSITIONS & SECTION FADE IN ---------- */
+
 section {
-opacity: 0;
-transform: translateY(6px);
-transition: opacity 420ms ease, transform 420ms ease;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 420ms ease, transform 420ms ease;
 }
 
 section.visible {
-opacity: 1;
-transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.hero { opacity: 1; transform: none; }
+.hero {
+    opacity: 1;
+    transform: none;
+}
+
 
 /* ---------- SMALL VISUAL POLISH ---------- */
+
 a:focus,
 button:focus,
 .hamburger:focus {
-outline: 3px solid var(--focus-outline);
-outline-offset: 2px;
-border-radius: 6px;
+    outline: 3px solid var(--focus-outline);
+    outline-offset: 2px;
+    border-radius: 6px;
 }
 
+
 /* tiny tweak: ensure images don't overflow their containers */
-img { max-width: 100%; height: auto; display: block; }
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 
 /* =========================================================
   THEME TOGGLE (CSS-only icon + animations)
@@ -757,185 +1110,233 @@ img { max-width: 100%; height: auto; display: block; }
       * dark -> light: moon sets, sun rises + 3 x 45° step spins
   ========================================================= */
 
+
 /* Hide the old img (we'll draw with CSS) */
-#theme-toggle img#theme-icon { display: none !important; }
+
+#theme-toggle img#theme-icon {
+    display: none !important;
+}
+
 
 /* Base button layout */
+
 #theme-toggle {
---btn-pad: 6px;
-  width: calc(var(--toggle-size) + 4px);
-  height: calc(var(--toggle-size) + 4px);
-  min-width: calc(var(--toggle-size) + 4px);
-  min-height: calc(var(--toggle-size) + 4px);
-  width: calc(var(--toggle-size) + 8px);
-  height: calc(var(--toggle-size) + 8px);
-  min-width: calc(var(--toggle-size) + 8px);
-  min-height: calc(var(--toggle-size) + 8px);
-border: none;
-outline: none;
-background: transparent;
-position: relative;
-display: grid;
-place-items: center;
-cursor: pointer;
-border-radius: 999px;
-isolation: isolate;
-  /* Subtle hover ring */
-  box-shadow: 0 0 0 0 rgba(255,255,255,0);
-transition: box-shadow .25s ease, transform .2s ease, background-color .25s ease;
-margin-left: 8px;   /* sits between logo and nav links */
-  z-index: 1200;
+    --btn-pad: 6px;
+    width: calc(var(--toggle-size) + 4px);
+    height: calc(var(--toggle-size) + 4px);
+    min-width: calc(var(--toggle-size) + 4px);
+    min-height: calc(var(--toggle-size) + 4px);
+    width: calc(var(--toggle-size) + 8px);
+    height: calc(var(--toggle-size) + 8px);
+    min-width: calc(var(--toggle-size) + 8px);
+    min-height: calc(var(--toggle-size) + 8px);
+    border: none;
+    outline: none;
+    background: transparent;
+    position: relative;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 999px;
+    isolation: isolate;
+    /* Subtle hover ring */
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    transition: box-shadow .25s ease, transform .2s ease, background-color .25s ease;
+    margin-left: 8px;
+    /* sits between logo and nav links */
+    z-index: 1200;
 }
+
 
 /* Hover */
+
 #theme-toggle:hover {
-box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
-transform: translateY(-1px);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
 }
+
 
 /* Ensure alignment next to logo + before links */
-nav > #theme-toggle { order: 1; }
-nav > .logo { order: 0; }
-nav > .nav-links, nav > ul { order: 2; }
+
+nav>#theme-toggle {
+    order: 1;
+}
+
+nav>.logo {
+    order: 0;
+}
+
+nav>.nav-links,
+nav>ul {
+    order: 2;
+}
+
 
 /* On mobile keep it visible near hamburger */
+
 @media (max-width: 768px) {
-  nav { gap: 8px; }
-  #theme-toggle { margin-left: 4px; }
+    nav {
+        gap: 8px;
+    }
+    #theme-toggle {
+        margin-left: 4px;
+    }
 }
+
 
 /* Sun (disk) — ::before */
+
+
 /* The sun (disk + hollow center + rays) is painted via ::before */
+
 #theme-toggle::before {
-content: "";
-position: absolute;
-width: var(--sun-size);
-height: var(--sun-size);
-border-radius: 50%;
-  /* Golden core + glow ring via layered gradients */
-  background:
-    radial-gradient(circle at 50% 50%, var(--sun-core) 0%, var(--sun-core-2) 65%, rgba(0,0,0,0) 66%),
-    radial-gradient(circle at 50% 50%, rgba(255,203,64,0.35) 0 60%, rgba(255,203,64,0) 61%);
-  box-shadow:
-    0 0 10px 2px rgba(255,193,71,0.35),
-    0 0 22px 6px rgba(255,193,71,0.28);
-  transform: translateY(0) rotate(0deg);
-transform-origin: 50% 50%;
-  z-index: 2;
-  opacity: 1;
-  z-index: 3;
-transition: opacity .35s ease, transform .35s ease;
-  /* disk core (radial) */
-  background: radial-gradient(circle at 50% 50%, var(--sun-core) 0 55%, transparent 56%);
-  /* hollow center ring to create hollow look (uses bg to "cut out") */
-  box-shadow:
-    inset 0 0 0 4px var(--bg), /* hollow center (uses page bg to appear hollow) */
-    0 0 10px 2px rgba(255,193,71,0.25);
-  opacity: 1;
+    content: "";
+    position: absolute;
+    width: var(--sun-size);
+    height: var(--sun-size);
+    border-radius: 50%;
+    /* Golden core + glow ring via layered gradients */
+    background: radial-gradient(circle at 50% 50%, var(--sun-core) 0%, var(--sun-core-2) 65%, rgba(0, 0, 0, 0) 66%), radial-gradient(circle at 50% 50%, rgba(255, 203, 64, 0.35) 0 60%, rgba(255, 203, 64, 0) 61%);
+    box-shadow: 0 0 10px 2px rgba(255, 193, 71, 0.35), 0 0 22px 6px rgba(255, 193, 71, 0.28);
+    transform: translateY(0) rotate(0deg);
+    transform-origin: 50% 50%;
+    z-index: 2;
+    opacity: 1;
+    z-index: 3;
+    transition: opacity .35s ease, transform .35s ease;
+    /* disk core (radial) */
+    background: radial-gradient(circle at 50% 50%, var(--sun-core) 0 55%, transparent 56%);
+    /* hollow center ring to create hollow look (uses bg to "cut out") */
+    box-shadow: inset 0 0 0 4px var(--bg), /* hollow center (uses page bg to appear hollow) */
+    0 0 10px 2px rgba(255, 193, 71, 0.25);
+    opacity: 1;
 }
+
 
 /* Moon (crescent) — ::after */
+
+
 /* Create 6 rays using extra box-shadow strokes on ::before */
+
 #theme-toggle::before {
-  /* additional multi-offset "flat" rays via extra shadows (thin rectangles) */
-  box-shadow:
-    inset 0 0 0 4px var(--bg),
-    0 -14px 0 -8px var(--sun-core),
-    0 14px 0 -8px var(--sun-core),
-    14px 0 0 -8px var(--sun-core),
-    -14px 0 0 -8px var(--sun-core),
-    10px 10px 0 -8px var(--sun-core),
-    -10px -10px 0 -8px var(--sun-core);
+    /* additional multi-offset "flat" rays via extra shadows (thin rectangles) */
+    box-shadow: inset 0 0 0 4px var(--bg), 0 -14px 0 -8px var(--sun-core), 0 14px 0 -8px var(--sun-core), 14px 0 0 -8px var(--sun-core), -14px 0 0 -8px var(--sun-core), 10px 10px 0 -8px var(--sun-core), -10px -10px 0 -8px var(--sun-core);
 }
 
+
 /* The moon (crescent) — constructed via layered radial-gradients on ::after */
+
 #theme-toggle::after {
-content: "";
-position: absolute;
-width: var(--moon-size);
-height: var(--moon-size);
-  transform-origin: 50% 50%;
-border-radius: 50%;
-  /* Crescent constructed from two radial gradients */
-  z-index: 2;
-  transition: opacity .35s ease, transform .35s ease;
-  /* crescent: main moon color then an overlapping circle in page-bg to carve out */
-background:
-    radial-gradient(circle at 50% 50%, var(--moon-core) 0 60%, transparent 61%) ,
-    radial-gradient(circle at 58% 42%, var(--bg) 0 60%, transparent 61%);
-  /* A cool night glow */
-    radial-gradient(circle at 44% 52%, var(--moon-core) 0 60%, transparent 61%),
-    radial-gradient(circle at 64% 42%, var(--bg) 0 58%, transparent 59%);
-box-shadow:
-    0 0 14px 2px rgba(140,160,255,0.35),
-    0 0 26px 8px rgba(140,160,255,0.18);
-  z-index: 2;
-    0 0 10px 2px rgba(140,160,255,0.18),
-    0 0 20px 6px rgba(140,160,255,0.12);
-opacity: 0;
-transform: translateY(calc(var(--rise-distance))) rotate(0deg);
-  transition: opacity .35s ease, transform .35s ease;
+    content: "";
+    position: absolute;
+    width: var(--moon-size);
+    height: var(--moon-size);
+    transform-origin: 50% 50%;
+    border-radius: 50%;
+    /* Crescent constructed from two radial gradients */
+    z-index: 2;
+    transition: opacity .35s ease, transform .35s ease;
+    /* crescent: main moon color then an overlapping circle in page-bg to carve out */
+    background: radial-gradient(circle at 50% 50%, var(--moon-core) 0 60%, transparent 61%), radial-gradient(circle at 58% 42%, var(--bg) 0 60%, transparent 61%);
+    /* A cool night glow */
+    radial-gradient(circle at 44% 52%,
+    var(--moon-core) 0 60%,
+    transparent 61%),
+    radial-gradient(circle at 64% 42%,
+    var(--bg) 0 58%,
+    transparent 59%);
+    box-shadow: 0 0 14px 2px rgba(140, 160, 255, 0.35), 0 0 26px 8px rgba(140, 160, 255, 0.18);
+    z-index: 2;
+    0 0 10px 2px rgba(140,
+    160,
+    255,
+    0.18),
+    0 0 20px 6px rgba(140,
+    160,
+    255,
+    0.12);
+    opacity: 0;
+    transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+    transition: opacity .35s ease, transform .35s ease;
 }
+
 
 /* STARFIELD around moon during dark animation:
    We'll paint stars on the BUTTON’s background using multiple radial-gradients.
    Default: hidden; toggled via animation classes. */
+
+
 /* STARFIELD — implemented as button-level background-images (not filter)
    We avoid using 'filter: opacity()' on the whole button (which hides pseudos)
    and instead toggle the background-image presence by theme and class. */
+
 #theme-toggle {
-  --stars-opacity: 0;
-  background-image:
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
-    radial-gradient(circle, var(--star) 0 1px, transparent 2px);
-background-repeat: no-repeat;
-  /* star positions */
-background-position:
-8px 6px,
-26px 10px,
-18px 4px,
-30px 22px,
-12px 26px,
-22px 16px;
-  background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-  /* background-image set conditionally for dark theme below */
+    --stars-opacity: 0;
+    background-image: radial-gradient(circle, var(--star) 0 1px, transparent 2px), radial-gradient(circle, var(--star) 0 1px, transparent 2px), radial-gradient(circle, var(--star) 0 1px, transparent 2px), radial-gradient(circle, var(--star) 0 1px, transparent 2px), radial-gradient(circle, var(--star) 0 1px, transparent 2px), radial-gradient(circle, var(--star) 0 1px, transparent 2px);
+    background-repeat: no-repeat;
+    /* star positions */
+    background-position: 8px 6px, 26px 10px, 18px 4px, 30px 22px, 12px 26px, 22px 16px;
+    background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    /* background-image set conditionally for dark theme below */
 }
+
 
 /* When dark theme is active, show star dots (simple 2px radial dots) */
+
 #theme-toggle[data-theme="dark"] {
-  background-image:
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px),
-    radial-gradient(circle, var(--star) 0 2px, transparent 3px);
-background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
-  /* Control visibility with opacity via a mask-like alpha */
-  filter: opacity(var(--stars-opacity));
+    background-image: radial-gradient(circle, var(--star) 0 2px, transparent 3px), radial-gradient(circle, var(--star) 0 2px, transparent 3px), radial-gradient(circle, var(--star) 0 2px, transparent 3px), radial-gradient(circle, var(--star) 0 2px, transparent 3px), radial-gradient(circle, var(--star) 0 2px, transparent 3px), radial-gradient(circle, var(--star) 0 2px, transparent 3px);
+    background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
+    /* Control visibility with opacity via a mask-like alpha */
+    filter: opacity(var(--stars-opacity));
 }
+
 
 /* Keep button itself visible even when filter is applied */
+
 #theme-toggle::before,
-#theme-toggle::after { filter: none; }
-/* When light theme, hide stars */
-#theme-toggle[data-theme="light"] {
-  background-image: none;
-  background-size: 0 0;
+#theme-toggle::after {
+    filter: none;
 }
 
-/* BASE STATES driven by button’s data-theme set by JS */
-#theme-toggle[data-theme="light"]::before { opacity: 1; transform: translateY(0) rotate(0deg); }
-#theme-toggle[data-theme="light"]::after  { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
-#theme-toggle[data-theme="light"]        { --stars-opacity: 0; }
 
-#theme-toggle[data-theme="dark"]::before { opacity: 0; transform: translateY(calc(var(--rise-distance))) rotate(0deg); }
-#theme-toggle[data-theme="dark"]::after  { opacity: 1; transform: translateY(0) rotate(0deg); }
-#theme-toggle[data-theme="dark"]         { --stars-opacity: 1; }
+/* When light theme, hide stars */
+
+#theme-toggle[data-theme="light"] {
+    background-image: none;
+    background-size: 0 0;
+}
+
+
+/* BASE STATES driven by button’s data-theme set by JS */
+
+#theme-toggle[data-theme="light"]::before {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
+#theme-toggle[data-theme="light"]::after {
+    opacity: 0;
+    transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+}
+
+#theme-toggle[data-theme="light"] {
+    --stars-opacity: 0;
+}
+
+#theme-toggle[data-theme="dark"]::before {
+    opacity: 0;
+    transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+}
+
+#theme-toggle[data-theme="dark"]::after {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
+#theme-toggle[data-theme="dark"] {
+    --stars-opacity: 1;
+}
+
 
 /* ---------------------------
   ANIMATIONS (triggered by JS)
@@ -943,131 +1344,217 @@ background-size: 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px, 2px 2px;
   Duration picked to match JS and page color transition (~900ms)
   --------------------------- */
 
+
 /* Light -> Dark:
   - Sun sets (down + fade)
   - Moon rises (up + fade in)
    - Stars blink 3x, then stay */
-   - Stars appear (we show them when data-theme=dark — the JS will toggle classes)
-*/
-#theme-toggle.to-dark::before {
-animation: sun-set 900ms ease forwards;
+
+- Stars appear (we show them when data-theme=dark — the JS will toggle classes) */ #theme-toggle.to-dark::before {
+    animation: sun-set 900ms ease forwards;
 }
+
 #theme-toggle.to-dark::after {
-  animation:
-    moon-rise 900ms ease forwards,
-    none 1ms ease 0s; /* placeholder to ensure combined listing is valid */
-  animation: moon-rise 900ms ease forwards;
+    animation: moon-rise 900ms ease forwards, none 1ms ease 0s;
+    /* placeholder to ensure combined listing is valid */
+    animation: moon-rise 900ms ease forwards;
 }
+
 #theme-toggle.to-dark {
-  animation: stars-blink-3 900ms steps(3, end) forwards;
-  /* Add a quick pulse on the button background to hint stars appearing */
-  animation: toggle-pulse 900ms ease forwards;
+    animation: stars-blink-3 900ms steps(3, end) forwards;
+    /* Add a quick pulse on the button background to hint stars appearing */
+    animation: toggle-pulse 900ms ease forwards;
 }
+
 
 /* Dark -> Light:
   - Moon sets (down + fade out)
    - Sun rises (up) + 3 x 45° step rotations (total 135°) */
-   - Sun rises (up) + 3 x 45° step rotations (total 135°)
-*/
-#theme-toggle.to-light::after {
-animation: moon-set 900ms ease forwards;
+
+- Sun rises (up)+3 x 45° step rotations (total 135°) */ #theme-toggle.to-light::after {
+    animation: moon-set 900ms ease forwards;
 }
+
 #theme-toggle.to-light::before {
-animation: sun-rise-spin 900ms ease forwards;
+    animation: sun-rise-spin 900ms ease forwards;
 }
+
 #theme-toggle.to-light {
-  /* Hide stars during the sequence */
-  animation: stars-hide 900ms linear forwards;
-  animation: toggle-pulse-out 900ms linear forwards;
+    /* Hide stars during the sequence */
+    animation: stars-hide 900ms linear forwards;
+    animation: toggle-pulse-out 900ms linear forwards;
 }
+
 
 /* Keyframes */
+
 @keyframes sun-set {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; filter: none; }
-  100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; filter: none; }
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+        opacity: 0;
+    }
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        filter: none;
+    }
+    100% {
+        transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+        opacity: 0;
+        filter: none;
+    }
 }
+
 @keyframes moon-rise {
-0%   { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    0% {
+        transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
 }
+
 @keyframes moon-set {
-0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-100% { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+        opacity: 0;
+    }
 }
+
+
 /* sunrise with stepped rotation: 3 steps x 45deg (135°) total */
+
 @keyframes sun-rise-spin {
-0%   { transform: translateY(calc(var(--rise-distance))) rotate(0deg); opacity: 0; }
-40%  { transform: translateY(0) rotate(0deg); opacity: 1; }
-55%  { transform: translateY(0) rotate(45deg); }
-70%  { transform: translateY(0) rotate(90deg); }
-85%  { transform: translateY(0) rotate(135deg); }
-100% { transform: translateY(0) rotate(135deg); }
+    0% {
+        transform: translateY(calc(var(--rise-distance))) rotate(0deg);
+        opacity: 0;
+    }
+    40% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    55% {
+        transform: translateY(0) rotate(45deg);
+    }
+    70% {
+        transform: translateY(0) rotate(90deg);
+    }
+    85% {
+        transform: translateY(0) rotate(135deg);
+    }
+    100% {
+        transform: translateY(0) rotate(135deg);
+    }
 }
+
+
 /* Stars: blink 3 times then visible */
+
 @keyframes stars-blink-3 {
-  0%   { --stars-opacity: 0; }
-  16%  { --stars-opacity: 1; }
-  33%  { --stars-opacity: 0; }
-  50%  { --stars-opacity: 1; }
-  66%  { --stars-opacity: 0; }
-  83%  { --stars-opacity: 1; }
-  100% { --stars-opacity: 1; }
+    0% {
+        --stars-opacity: 0;
+    }
+    16% {
+        --stars-opacity: 1;
+    }
+    33% {
+        --stars-opacity: 0;
+    }
+    50% {
+        --stars-opacity: 1;
+    }
+    66% {
+        --stars-opacity: 0;
+    }
+    83% {
+        --stars-opacity: 1;
+    }
+    100% {
+        --stars-opacity: 1;
+    }
 }
+
+
 /* Stars: fade out cleanly during sunrise */
+
 @keyframes stars-hide {
-  0%   { --stars-opacity: 1; }
-  100% { --stars-opacity: 0; }
-
-/* small pulse to hint stars showing/hiding */
-@keyframes toggle-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
-  30%  { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-  100% { box-shadow: none; }
-}
-@keyframes toggle-pulse-out {
-  0%   { box-shadow: none; }
-  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
-}
-
-/* Accessibility hover/focus ring for the toggle */
-#theme-toggle:focus-visible {
-outline: 3px solid var(--focus-outline);
-outline-offset: 4px;
-}
-
-/* Optional: subtle background chip depending on theme */
-#theme-toggle[data-theme="light"] {
-background-color: rgba(255, 199, 72, 0.06);
-}
-#theme-toggle[data-theme="dark"] {
-background-color: rgba(123, 111, 255, 0.06);
-}
-
-/* =========================================================
+    0% {
+        --stars-opacity: 1;
+    }
+    100% {
+        --stars-opacity: 0;
+    }
+    /* small pulse to hint stars showing/hiding */
+    @keyframes toggle-pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+        30% {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        100% {
+            box-shadow: none;
+        }
+    }
+    @keyframes toggle-pulse-out {
+        0% {
+            box-shadow: none;
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+    }
+    /* Accessibility hover/focus ring for the toggle */
+    #theme-toggle:focus-visible {
+        outline: 3px solid var(--focus-outline);
+        outline-offset: 4px;
+    }
+    /* Optional: subtle background chip depending on theme */
+    #theme-toggle[data-theme="light"] {
+        background-color: rgba(255, 199, 72, 0.06);
+    }
+    #theme-toggle[data-theme="dark"] {
+        background-color: rgba(123, 111, 255, 0.06);
+    }
+    /* =========================================================
   EXTRA: Smooth theme transition across the whole page
   (body already has a background & color transition)
   Make surfaces + header also animate nicely.
   ========================================================= */
-header, footer, .project-card, .skills-grid span, .cert-thumb, .hero {
-transition: background-color 350ms ease, color 350ms ease, box-shadow 350ms ease, filter 350ms ease;
-}
-
-/* =========================================================
+    header,
+    footer,
+    .project-card,
+    .skills-grid span,
+    .cert-thumb,
+    .hero {
+        transition: background-color 350ms ease, color 350ms ease, box-shadow 350ms ease, filter 350ms ease;
+    }
+    /* =========================================================
   UTIL: Bouncy arrow used earlier
   ========================================================= */
-@keyframes bounce {
-0%, 100% { transform: translateY(0); }
-40%     { transform: translateY(-4px); }
-60%     { transform: translateY(-2px); }
-}
-
-/* ---------- END OF FILE ---------- */
-/* All original features preserved; surfaces and accents are theme-aware.
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-4px);
+        }
+        60% {
+            transform: translateY(-2px);
+        }
+    }
+    /* ---------- END OF FILE ---------- */
+    /* All original features preserved; surfaces and accents are theme-aware.
   Theme toggle is CSS-only (sun/moon/stars), positioned near the nav,
   animated as specified, and obeys JS manual override. */
-
-
-
-
