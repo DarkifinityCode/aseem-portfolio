@@ -1,0 +1,7 @@
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-family: var(--font-heading);
+  color: var(--text);
+}
