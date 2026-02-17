@@ -1,0 +1,9 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.86);
+  z-index: 2000;
+}
