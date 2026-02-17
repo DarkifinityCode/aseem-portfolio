@@ -1,0 +1,15 @@
+@media (max-width:768px){
+  .nav-links{
+    display:none;
+    flex-direction:column;
+  }
+  .nav-links.active{
+    display:flex;
+  }
+}
+
+@media (max-width:420px){
+  .cert-grid{
+    grid-template-columns:1fr;
+  }
+}
