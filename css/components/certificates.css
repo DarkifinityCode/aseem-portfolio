@@ -1,0 +1,11 @@
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.cert-thumb {
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
